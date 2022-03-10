@@ -1,0 +1,179 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.form-label {
+  font-family: sans-serif;
+  margin: 10px;
+  font-weight: bold;
+}
+
+header {
+  display: flex;
+  margin: 0;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 6px 6%;
+  background-color: #eaecf3;
+}
+
+.logo {
+  margin-right: auto;
+}
+
+.nav__links {
+  list-style: none;
+  display: flex;
+}
+
+.nav__links a,
+.cta,
+.overlay__content a {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  /* border-style: solid; */
+  border-width: 5px;
+  font-weight: bold;
+  color: #24262b;
+  border: #0088a9;
+  border-radius: 50px;
+  padding: 9px 8px;
+  text-decoration: none;
+}
+
+.nav__links li {
+  padding: 0px 20px;
+}
+
+.nav__links li a {
+  transition: all 0.3s ease 0s;
+  border-width: 5px;
+  border: #0088a9;
+  border-radius: 50px;
+}
+
+.nav__links li a:hover {
+  padding: 9px 10px;
+  background-color: rgba(0, 136, 169, 1);
+  border: none;
+
+  color: #eaecf3;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+.cta {
+  margin-left: 20px;
+  padding: 9px 25px;
+  background-color: rgba(0, 136, 169, 1);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+.cta:hover {
+  background-color: rgba(0, 136, 169, 0.8);
+}
+
+/* Mobile Nav */
+
+.menu {
+  display: none;
+}
+
+.overlay {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 80px;
+  background-color: #24252a;
+  overflow-x: hidden;
+  transition: all 0.5s ease 0s;
+}
+
+.overlay--active {
+  width: 40%;
+}
+
+.overlay__content {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay a {
+  border-width: 5px;
+  color: #edf0f1;
+  border: #0088a9;
+  border-radius: 50px;
+  padding: 15px;
+  font-size: 14px;
+  display: block;
+  transition: all 0.3s ease 0s;
+}
+
+.overlay a:hover,
+.overlay a:focus {
+  color: #0088a9;
+}
+.overlay .close {
+  position: absolute;
+  right: 10px;
+  font-size: 60px;
+  color: #edf0f1;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 800px) {
+  .nav__links,
+  .cta {
+    display: none;
+  }
+  .menu {
+    display: initial;
+  }
+}
+.bubble-text{
+  background:rgba(0, 136, 169, 0.8);
+  color:#fff; 
+  padding:7px 15px;
+  border-radius:3px;
+  width:300px;
+  height: 90px;
+  margin-right: 200px;
+  position: absolute;
+
+}
+.bubble-text p{
+  font-size: 14px;
+  font-weight: lighter;
+  text-align: center;
+  margin-top:10px;
+}
+.bubble{
+  margin-right: 200px;
+  position: absolute;
+  padding-top: 150px;
+  padding-left: 900px;
+
+}
+
+.bubble-text::after{
+content:""; 
+
+border-left:20px solid transparent;
+border-right:20px solid transparent;
+border-top: 20px solid rgba(0, 136, 169, 0.8);
+position: absolute;
+margin-top: 17px;
+
+
+}
