@@ -3,14 +3,14 @@ import FormRow from "../components/FormRow";
 import Wrapper from "../assets/wrappers/RegisterPage";
 import { useAppContext } from "../context/appContext";
 import { useNavigate } from "react-router-dom";
-import UserNavBar from "../components/UserNavBar";
+import UserNavbar from "../components/NavBar/UserNavBar";
 import Footer from "../components/compenent-footer/Footer";
 import "../css/RDV.scss";
 
 function MesRdvPass() {
   return (
     <>
-      <UserNavBar />
+      <UserNavbar />
       <Wrapper className="full-page">
         <nav className="RdvNav">
           <a href="/MesRdv">Rendez-vous à venir</a>

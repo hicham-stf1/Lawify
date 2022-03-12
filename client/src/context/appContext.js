@@ -32,7 +32,6 @@ export const initialState = {
   token: token,
   userLocation: userLocation || "",
   alertType: "",
-
   city: "Choose one",
   specialite: "Choose one",
   villeOptions: ["interview", "declined", "pending"],

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import FormRow from "../components/FormRow";
 import Wrapper from "../assets/wrappers/DashboardFormPage";
-import NavBar from "../components/NavBar";
+import Navbar from "../components/NavBar/Navbar";
 import Footer from "../components/compenent-footer/Footer";
 import { useNavigate } from "react-router-dom";
 import FormRowSelect from "../components/FormRowSelect";
@@ -60,7 +60,7 @@ function LawyerRegister() {
 
   return (
     <div>
-      <NavBar />
+      <Navbar />
       <Wrapper>
         <form className="form" onSubmit={onSubmit}>
           <h3

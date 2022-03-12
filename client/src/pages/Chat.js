@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import "../css/Chat.css";
-import NavBar from "../components/NavBar";
 import Footer from "../components/compenent-footer/Footer";
-import UserNavBar from "../components/UserNavBar";
+import UserNavbar from "../components/NavBar/UserNavBar";
 // global context and useNavigate later
 
 const initialState = {
@@ -26,7 +25,7 @@ function Login() {
   };
   return (
     <>
-      <UserNavBar />
+      <UserNavbar />
 
       <div className="container">
         <div id="wrapper">

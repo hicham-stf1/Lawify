@@ -4,14 +4,14 @@ import Wrapper from "../assets/wrappers/RegisterPage";
 
 import { useAppContext } from "../context/appContext";
 import { useNavigate } from "react-router-dom";
-import UserNavBar from "../components/UserNavBar";
+import UserNavbar from "../components/NavBar/UserNavBar";
 import Footer from "../components/compenent-footer/Footer";
 import "../css/RDV.scss";
 
 function MesRdv() {
   return (
     <>
-      <UserNavBar />
+      <UserNavbar />
       <Wrapper className="full-page">
         <nav className="RdvNav">
           <a href="/MesRdv">Rendez-vous à venir</a>
@@ -35,9 +35,11 @@ function MesRdv() {
               Vous aurez rendez-vous le 1 février 2022 <br />
               14:30-14:45
             </p>
-           <a href="/message"><button type="submit" className="btn btn-block">
-              Envoyer un message
-            </button></a>
+            <a href="/message">
+              <button type="submit" className="btn btn-block">
+                Envoyer un message
+              </button>
+            </a>
             <button type="submit" className="btn btn-block">
               Annuler le rendez-vous
             </button>

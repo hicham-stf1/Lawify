@@ -18,7 +18,6 @@ import MesRdv from "./pages/MesRdv";
 import MesRdvPass from "./pages/MesRdvPass";
 import Profil from "./pages/Profil";
 
-
 import LawyerRegister from "./pages/LawyerRegister";
 import AvocatHome from "./pages/AvocatHome";
 import UserProfile from "./pages/UserProfile";
@@ -29,9 +28,7 @@ function App() {
       <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/Profil" element={<Profil />} />
-      
         <Route path="/userProfil" element={<UserProfile />} />
-      
         <Route path="/MesRdv" element={<MesRdv />} />
         <Route path="/RDV" element={<FormRdv />} />
         <Route path="/MesRdvPass" element={<MesRdvPass />} />

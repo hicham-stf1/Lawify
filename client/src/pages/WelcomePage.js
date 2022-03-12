@@ -1,14 +1,13 @@
 import React from "react";
-import NavBar from "../components/NavBar";
 import SearchCard from "../components/SearchCard";
 import TextHeader from "../components/TextHeader";
 
 import Footer from "../components/compenent-footer/Footer";
-
+import Navbar from "../components/NavBar/Navbar";
 export default function WelcomePage() {
   return (
     <div>
-      <NavBar />
+      <Navbar />
       <TextHeader />
       <SearchCard />
       <Footer />

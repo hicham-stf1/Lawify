@@ -1,12 +1,12 @@
 import React from "react";
-import NavBar from "../components/NavBar";
+import Navbar from "../components/NavBar/Navbar";
 import Login from "./Login";
 import Footer from "../components/compenent-footer/Footer";
 
 export default function MonCompte() {
   return (
     <div>
-      <NavBar />
+      <Navbar />
       <Login />
       <Footer />
     </div>
