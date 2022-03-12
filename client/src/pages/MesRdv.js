@@ -35,9 +35,9 @@ function MesRdv() {
               Vous aurez rendez-vous le 1 février 2022 <br />
               14:30-14:45
             </p>
-            <button type="submit" className="btn btn-block">
+           <a href="/message"><button type="submit" className="btn btn-block">
               Envoyer un message
-            </button>
+            </button></a>
             <button type="submit" className="btn btn-block">
               Annuler le rendez-vous
             </button>
