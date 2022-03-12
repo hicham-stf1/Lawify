@@ -12,6 +12,9 @@ class Contact extends Component {
                 <div class="profil-description">Location</div><br/>
                 <i class="fa fa-map-marker"> 250 rue Saint Jacques -Paris</i><br/>
                 <a href='/'><button class="follow-btn">Accueil</button></a> 
+                <a href='/'><button class="follow-btn">Modifier</button></a> 
+
+
                 </div>
         )
     }

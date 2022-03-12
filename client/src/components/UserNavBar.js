@@ -35,7 +35,7 @@ export default function UNavBar() {
             </li>
             <li>
               {/* <Link to="/message"> */}
-              <a href="/" onClick={logoutUser}>
+              <a href="/message" onClick={logoutUser}>
                 Mes Messages
               </a>
               {/* </Link> */}
