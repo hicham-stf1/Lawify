@@ -160,7 +160,6 @@ function LawyerRegister() {
           </div>
         </form>
       </Wrapper>
-      <Footer />
     </div>
   );
 }

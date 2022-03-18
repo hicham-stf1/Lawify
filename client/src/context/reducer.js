@@ -14,6 +14,12 @@ import {
   UPDATE_USER_BEGIN,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
+  FETCH_JOBS_SUCCESS,
+  FETCH_JOBS_ERROR,
+  CREATE_JOB_SUCCESS,
+  CREATE_JOB_ERROR,
+  DELETE_JOB_ERROR,
+  SET_USER,
 } from "./actions";
 
 import { initialState } from "./appContext";
@@ -150,6 +156,47 @@ const reducer = (state, action) => {
       alertText: action.payload.msg,
     };
   }
+
+  if (action.type === FETCH_JOBS_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      editItem: null,
+      singleJobError: false,
+      editComplete: false,
+      jobs: action.payload,
+    };
+  }
+  if (action.type === FETCH_JOBS_ERROR) {
+    return { ...state, isLoading: false };
+  }
+  if (action.type === CREATE_JOB_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      jobs: [...state.jobs, action.payload],
+    };
+  }
+  if (action.type === CREATE_JOB_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+    };
+  }
+
+  if (action.type === DELETE_JOB_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+    };
+  }
+
+  if (action.type === SET_USER) {
+    return { ...state, user: action.payload };
+  }
+
   throw new Error(`no such action :${action.type}`);
 };
 export default reducer;

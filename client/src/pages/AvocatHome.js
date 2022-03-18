@@ -7,7 +7,6 @@ export default function AvocatHome() {
     <div>
       <UserNavbar />
       <h2>Welcome To Avocat home</h2>
-      <Footer />
     </div>
   );
 }

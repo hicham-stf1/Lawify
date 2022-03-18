@@ -21,6 +21,7 @@ import Profil from "./pages/Profil";
 import LawyerRegister from "./pages/LawyerRegister";
 import AvocatHome from "./pages/AvocatHome";
 import UserProfile from "./pages/UserProfile";
+import Footer from "./components/compenent-footer/Footer";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
       <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/Profil" element={<Profil />} />
-        <Route path="/userProfil" element={<UserProfile />} />
+        <Route path="/updateUser" element={<UserProfile />} />
         <Route path="/MesRdv" element={<MesRdv />} />
         <Route path="/RDV" element={<FormRdv />} />
         <Route path="/MesRdvPass" element={<MesRdvPass />} />
@@ -42,7 +43,8 @@ function App() {
         <Route path="/registeravocat" element={<LawyerRegister />} />
         <Route path="/searchresult" element={<SearchResult />} />
         <Route path="*" element={<Error />} />
-      </Routes>
+      </Routes>{" "}
+      <Footer />
     </BrowserRouter>
   );
 }

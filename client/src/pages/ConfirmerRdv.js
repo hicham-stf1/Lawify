@@ -71,7 +71,6 @@ function ConfirmerRdv() {
           <a href="/RDV">Vous n'avez pas reçu votre code ?</a>
         </form>
       </Wrapper>
-      <Footer />
     </>
   );
 }

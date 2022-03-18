@@ -9,7 +9,6 @@ export default function SearchResult() {
       <NavBar />
       {/* <SearchCard /> */}
       <JobsContainer />
-      <Footer />
     </div>
   );
 }

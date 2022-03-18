@@ -43,7 +43,6 @@ function MesRdvPass() {
           </div>
         </div>
       </Wrapper>
-      <Footer />
     </>
   );
 }
