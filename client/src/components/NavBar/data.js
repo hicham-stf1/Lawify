@@ -32,7 +32,7 @@ export const userHomeLinks = [
   },
   {
     id: 4,
-    url: "/userProfil",
+    url: "/updateUser",
     text: "Mon Profil",
   },
 ];

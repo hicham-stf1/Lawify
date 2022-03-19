@@ -8,7 +8,6 @@ export default function MonCompte() {
     <div>
       <Navbar />
       <Login />
-      <Footer />
     </div>
   );
 }

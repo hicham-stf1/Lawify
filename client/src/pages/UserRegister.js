@@ -128,7 +128,6 @@ function UserRegister() {
           </button>
         </form>
       </Wrapper>
-      <Footer />
     </div>
   );
 }

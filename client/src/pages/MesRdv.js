@@ -46,7 +46,6 @@ function MesRdv() {
           </div>
         </div>
       </Wrapper>
-      <Footer />
     </>
   );
 }

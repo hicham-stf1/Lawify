@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useContext } from "react";
+import React, { useState, useReducer, useContext, useEffect } from "react";
 import reducer from "./reducer";
 import axios from "axios";
 
@@ -18,6 +18,13 @@ import {
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
   LOGOUT_USER,
+  FETCH_JOBS_SUCCESS,
+  FETCH_JOBS_ERROR,
+  CREATE_JOB_SUCCESS,
+  CREATE_JOB_ERROR,
+  DELETE_JOB_ERROR,
+  SET_USER,
+  CREATE_JOB_BEGIN,
 } from "./actions";
 
 const token = localStorage.getItem("token");
@@ -36,6 +43,13 @@ export const initialState = {
   specialite: "Choose one",
   villeOptions: ["interview", "declined", "pending"],
   specialityOptions: ["Droit de Rien", "Droit de Sport", "Droit de la Famille"],
+  position: "",
+  company: "",
+
+  jobs: [],
+  editItem: null,
+  singleJobError: false,
+  editComplete: false,
 };
 const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
@@ -165,12 +179,37 @@ const AppProvider = ({ children }) => {
     }
     clearAlert();
   };
+
+  // axios
   const authFetch = axios.create({
     baseURL: "/api/v1",
-    headers: {
-      Authorization: `Bearer ${state.token}`,
-    },
   });
+  // request
+
+  authFetch.interceptors.request.use(
+    (config) => {
+      config.headers.common["Authorization"] = `Bearer ${state.token}`;
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
+  // response
+
+  authFetch.interceptors.response.use(
+    (response) => {
+      return response;
+    },
+    (error) => {
+      // console.log(error.response)
+      if (error.response.status === 401) {
+        logoutUser();
+      }
+      return Promise.reject(error);
+    }
+  );
+
   const updateUser = async (currentUser) => {
     dispatch({ type: UPDATE_USER_BEGIN });
     try {
@@ -193,6 +232,37 @@ const AppProvider = ({ children }) => {
     }
     clearAlert();
   };
+
+  // create job
+  const createJob = async () => {
+    dispatch({ type: CREATE_JOB_BEGIN });
+    try {
+      const { position, company } = state;
+      await authFetch.post("/jobs", {
+        position,
+        company,
+        // jobLocation,
+        // jobType,
+        // status,
+      });
+      dispatch({ type: CREATE_JOB_SUCCESS });
+    } catch (error) {
+      if (error.response.status === 401) return;
+      dispatch({
+        type: CREATE_JOB_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+    clearAlert();
+  };
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      const newUser = JSON.parse(user);
+      dispatch({ type: SET_USER, payload: newUser.name });
+    }
+  }, []);
   return (
     <AppContext.Provider
       value={{
@@ -204,6 +274,7 @@ const AppProvider = ({ children }) => {
         setupUser,
         logoutUser,
         updateUser,
+        createJob,
       }}
     >
       {children}

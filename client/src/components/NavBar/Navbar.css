@@ -141,7 +141,7 @@ Navbar
 */
 nav {
   background-color: #eaecf3;
-  box-shadow: var(--light-shadow);
+  /* box-shadow: var(--light-shadow); */
   margin-bottom: 20px;
 }
 .nav-header {

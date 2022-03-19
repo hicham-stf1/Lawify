@@ -91,7 +91,6 @@ function FormRdv() {
           </button>
         </form>
       </Wrapper>
-      <Footer />
     </>
   );
 }

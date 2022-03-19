@@ -12,10 +12,18 @@ import connectDB from "./db/connect.js";
 
 // routers
 import authRouter from "./routes/authRoutes.js";
+import jobsRouter from "./routes/jobsRoutes.js";
 
 //middleware
 import errorHandlerMiddleware from "./middleware/error-handler.js";
 import notFoundModule from "./middleware/not-found.js";
+import authenticateUser from "./middleware/auth.js";
+
+// axios.get("https://fontawesome.com/v4/icons/", {
+//   headers: {
+//     "Access-Control-Allow-Origin": true,
+//   },
+// });
 
 if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
@@ -33,6 +41,8 @@ app.get("/api/v1", (req, res) => {
 });
 
 app.use("/api/v1/auth", authRouter);
+// app.use("/api/v1/auth", authenticateUser, authRouter);
+app.use("/api/v1/jobs", jobsRouter);
 
 app.use(notFoundModule);
 app.use(errorHandlerMiddleware);
