@@ -13,7 +13,6 @@ function Profil() {
     <div ><UserNavbar /><br/>
       <Banner /><br/>
       <About /><br/>
-      <Footer />
     </div>
   );
 }

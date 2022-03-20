@@ -109,7 +109,7 @@
   font-size: 25px;
   font-weight: bold;
   float: left;
-  margin-left: 15px;
+  margin-left: 230px;
   margin-top: 5px;
   color: black;
   font-weight: bold;
@@ -122,8 +122,8 @@
 }
 
 .about {
-  margin-left: 235px;
-  margin-top: 45px;
+  margin-left: 230px;
+  /* margin-top: 45px; */
   line-height: 21px;
   color: black;
 }
@@ -213,6 +213,7 @@ hr {
 
 .infos {
   margin: 7px 7px 7px 25px;
+  padding-bottom: 3px;
   color: black;
   list-style-type: square;
   font-weight: bold;
@@ -229,4 +230,54 @@ hr {
 
 .infos span {
   font-weight: normal;
+}
+
+.box {
+  display: grid;
+  grid-template-columns: auto 250px;
+  margin-top: 50px;
+  margin-bottom: 15px;
+}
+
+.actions,
+.about {
+  width: fit-content;
+}
+
+.actions {
+  margin-right: 20px;
+  margin-top: 30px;
+}
+
+.verified {
+  width: 190px;
+  margin-left: 23px;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  color: rgb(19, 151, 30);
+}
+.cover-photo {
+  display: grid;
+  grid-template-columns: auto;
+}
+.experience {
+  color: black;
+  margin: 8px 0 0 30px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.navbar-button {
+  border: thin solid black;
+}
+
+.button {
+  margin: 0px;
+  margin-bottom: 20px;
 }
