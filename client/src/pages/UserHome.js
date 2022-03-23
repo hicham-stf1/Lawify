@@ -1,13 +1,15 @@
 import React from "react";
 import UserNavbar from "../components/NavBar/UserNavBar";
-
-import Profil from "../pages/Profil";
+import AddJob from "./AddTime";
+import FetchTime from "./FetchTime";
 
 export default function UserHome() {
   return (
     <div>
       <UserNavbar />
-      <Profil />
+      {/* <AddJob /> */}
+      {/* <FetchTime /> */}
+      {/* <Profil /> */}
     </div>
   );
 }

@@ -31,3 +31,5 @@ export const SET_USER = "SET_USER";
 
 export const GET_JOBS_BEGIN = "GET_JOBS_BEGIN";
 export const GET_JOBS_SUCCESS = "GET_JOBS_SUCCESS";
+
+export const HANDLE_CHANGE = "HANDLE_CHANGE";

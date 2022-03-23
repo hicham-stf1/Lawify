@@ -11,11 +11,11 @@ export default function SignUpSwitch() {
           display: "block",
           fontSize: "var(--smallText)",
           marginBottom: "0.5rem",
-          textTransform: "capitalize",
+
           letterSpacing: "var(--letterSpacing)",
         }}
       >
-        Register As :
+        Register as a :
       </h6>
       <div
         style={{
@@ -30,7 +30,7 @@ export default function SignUpSwitch() {
         <div style={{ flex: 1, float: "left", marginRight: "17px" }}>
           <Link to="/registeravocat">
             <button type="submit" className="btn btn-block">
-              A Lawyer
+              Lawyer
             </button>
           </Link>
         </div>
@@ -42,7 +42,7 @@ export default function SignUpSwitch() {
               type="submit"
               className="btn btn-block"
             >
-              A Client
+              Client
             </button>
           </Link>
         </div>

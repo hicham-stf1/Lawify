@@ -19,12 +19,32 @@ import {
   CREATE_JOB_SUCCESS,
   CREATE_JOB_ERROR,
   DELETE_JOB_ERROR,
+  GET_JOBS_BEGIN,
   SET_USER,
+  HANDLE_CHANGE,
+  GET_JOBS_SUCCESS,
 } from "./actions";
 
 import { initialState } from "./appContext";
 
 const reducer = (state, action) => {
+  if (action.type === GET_JOBS_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      jobs: action.payload.jobs,
+      totalJobs: action.payload.totalJobs,
+      numOfPages: action.payload.numOfPages,
+    };
+  }
+
+  if (action.type === HANDLE_CHANGE) {
+    return {
+      ...state,
+      page: 1,
+      [action.payload.name]: action.payload.value,
+    };
+  }
   if (action.type === DISPLAY_ALERT) {
     return {
       ...state,
@@ -195,6 +215,9 @@ const reducer = (state, action) => {
 
   if (action.type === SET_USER) {
     return { ...state, user: action.payload };
+  }
+  if (action.type === GET_JOBS_BEGIN) {
+    return { ...state, isLoading: true, showAlert: false };
   }
 
   throw new Error(`no such action :${action.type}`);

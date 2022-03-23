@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-const JobsColumns = () => {
+const JobColumns = () => {
   return (
     <Wrapper>
-      <span>position</span>
-      <span>company</span>
-      <span>date</span>
-      <span>status</span>
+      <span>day</span>
+      <span>Heure de départ</span>
+      <span>Heure de fin</span>
+      <span></span>
+      {/* <span>status</span> */}
       <span className="action">action</span>
     </Wrapper>
   );
@@ -15,6 +16,7 @@ const JobsColumns = () => {
 
 const Wrapper = styled.section`
   display: none;
+
   @media (min-width: 992px) {
     display: block;
     background: var(--grey-200);
@@ -36,4 +38,4 @@ const Wrapper = styled.section`
   }
 `;
 
-export default JobsColumns;
+export default JobColumns;
