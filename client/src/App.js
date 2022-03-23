@@ -1,6 +1,7 @@
 import "./App.css";
 
 import { WelcomePage, MonCompte, AreYouALawyer, Error } from "./pages";
+import Messenger from "./pages/messenger/Messenger.jsx";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 //This need a refactor later
@@ -42,6 +43,7 @@ function App() {
         <Route path="/registeruser" element={<UserRegister />} />
         <Route path="/registeravocat" element={<LawyerRegister />} />
         <Route path="/searchresult" element={<SearchResult />} />
+        <Route path="/messenger" element={<Messenger />} />
         <Route path="*" element={<Error />} />
       </Routes>{" "}
       <Footer />

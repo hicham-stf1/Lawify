@@ -11,8 +11,11 @@ import "express-async-errors";
 import connectDB from "./db/connect.js";
 
 // routers
+import userRoutes from "./routes/userRoutes.js";
 import authRouter from "./routes/authRoutes.js";
 import jobsRouter from "./routes/jobsRoutes.js";
+import conversationRouter from "./routes/conversations.js";
+import messageRouter from "./routes/messages.js";
 
 //middleware
 import errorHandlerMiddleware from "./middleware/error-handler.js";
@@ -43,6 +46,9 @@ app.get("/api/v1", (req, res) => {
 app.use("/api/v1/auth", authRouter);
 // app.use("/api/v1/auth", authenticateUser, authRouter);
 app.use("/api/v1/jobs", jobsRouter);
+app.use("/api/users", userRoutes);
+app.use("/api/v1/conversations", conversationRouter);
+app.use("/api/v1/messages", messageRouter);
 
 app.use(notFoundModule);
 app.use(errorHandlerMiddleware);

@@ -7,8 +7,8 @@ import Wrapper1 from "../assets/wrappers/RegisterPage";
 import FormRowSelect from "../components/FormRowSelect";
 
 const initialState = {
-  spécialité: "",
-  ville: "",
+  speciality: "",
+  city: "",
 };
 
 function SearchCard() {
@@ -17,7 +17,8 @@ function SearchCard() {
   // global context and useNavigate later
 
   const handleChange = (e) => {
-    console.log(e.target);
+    setValues({ ...values, [e.target.name]: e.target.value });
+    console.log(values);
   };
 
   const onSubmit = (e) => {
@@ -37,20 +38,20 @@ function SearchCard() {
                 {/* Spécialité field */}
                 <div className="form-row">
                   <FormRowSelect
-                    labelText="Spécialité"
-                    name="searchStatus"
-                    value="Choose One"
+                    labelText="speciality"
+                    name="speciality"
+                    value={values.speciality}
                     handleChange={handleChange}
-                    list={["all", "hhh", "hhhhhh"]}
+                    list={["speciality1", "speciality2", "speciality3"]}
                   />
 
                   {/* <DropDown1 /> */}
                   <FormRowSelect
-                    labelText="Ville"
-                    name="searchStatus"
-                    value="Choose One"
+                    labelText="city"
+                    name="city"
+                    value={values.city}
                     handleChange={handleChange}
-                    list={["all", "hhh", "hhhhhh"]}
+                    list={["meknes", "rabat", "casa"]}
                   />
                 </div>
                 <Link to="/searchresult">
