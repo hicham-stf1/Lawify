@@ -26,11 +26,15 @@ const UserSchema = new mongoose.Schema({
     required: [true, "Please provide password"],
     minlength: 6,
   },
-  phoneuNmber: {
+  phoneuNumber: {
     type: Number,
     maxlength: 20,
     trim: true,
     default: "0616202020",
+  },
+  role: {
+    type: String,
+    default: "User",
   },
 });
 

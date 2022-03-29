@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import UserNavbar from "../components/NavBar/UserNavBar";
 import Footer from "../components/compenent-footer/Footer";
 import "../css/RDV.scss";
+import FetchTime from "./FetchTime";
 
 function MesRdv() {
   return (
@@ -46,6 +47,7 @@ function MesRdv() {
           </div>
         </div>
       </Wrapper>
+      <FetchTime />
     </>
   );
 }

@@ -8,11 +8,17 @@ import "../css/Main.css"
 
 
 
+
+
 function Profil() {
   return (
-    <div ><UserNavbar /><br/>
-      <Banner /><br/>
-      <About /><br/>
+    <div>
+      <UserNavbar />
+      <br />
+      <Banner />
+      <br />
+      <About />
+      <br />
     </div>
   );
 }

@@ -2,21 +2,26 @@ import mongoose from "mongoose";
 
 const JobSchema = new mongoose.Schema(
   {
-    company: {
+    startTime: {
       type: String,
-      required: [true, "Please provide company"],
+      required: [true, "Please provide startTime"],
       maxlength: 50,
     },
-    position: {
+    endTime: {
       type: String,
-      required: [true, "Please provide position"],
+      required: [true, "Please provide endTime"],
       maxlength: 100,
     },
-    createdBy: {
-      type: mongoose.Types.ObjectId,
-      ref: "User",
-      required: [true, "Please provide user"],
+    day: {
+      type: String,
+      enum: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
+      default: "full-time",
     },
+    // createdBy: {
+    //   type: mongoose.Types.ObjectId,
+    //   ref: "User",
+    //   required: [true, "Please provide user"],
+    // },
   },
   { timestamps: true }
 );

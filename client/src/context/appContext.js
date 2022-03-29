@@ -25,6 +25,9 @@ import {
   DELETE_JOB_ERROR,
   SET_USER,
   CREATE_JOB_BEGIN,
+  HANDLE_CHANGE,
+  GET_JOBS_BEGIN,
+  GET_JOBS_SUCCESS,
 } from "./actions";
 
 const token = localStorage.getItem("token");
@@ -43,10 +46,11 @@ export const initialState = {
   specialite: "Choose one",
   villeOptions: ["interview", "declined", "pending"],
   specialityOptions: ["Droit de Rien", "Droit de Sport", "Droit de la Famille"],
-  position: "",
-  company: "",
-
+  endTime: "",
+  startTime: "",
   jobs: [],
+  day: "full-time",
+  jobTypeOptions: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
   editItem: null,
   singleJobError: false,
   editComplete: false,
@@ -55,6 +59,10 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
   //   const [state, setState] = useState(initialState);
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const handleChange = ({ name, value }) => {
+    dispatch({ type: HANDLE_CHANGE, payload: { name, value } });
+  };
 
   const displayAlert = () => {
     dispatch({ type: DISPLAY_ALERT });
@@ -237,10 +245,11 @@ const AppProvider = ({ children }) => {
   const createJob = async () => {
     dispatch({ type: CREATE_JOB_BEGIN });
     try {
-      const { position, company } = state;
+      const { startTime, endTime, day } = state;
       await authFetch.post("/jobs", {
-        position,
-        company,
+        startTime,
+        endTime,
+        day,
         // jobLocation,
         // jobType,
         // status,
@@ -275,6 +284,7 @@ const AppProvider = ({ children }) => {
         logoutUser,
         updateUser,
         createJob,
+        handleChange,
       }}
     >
       {children}

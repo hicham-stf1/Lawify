@@ -13,9 +13,10 @@ import connectDB from "./db/connect.js";
 // routers
 import userRoutes from "./routes/userRoutes.js";
 import authRouter from "./routes/authRoutes.js";
-import jobsRouter from "./routes/jobsRoutes.js";
 import conversationRouter from "./routes/conversations.js";
 import messageRouter from "./routes/messages.js";
+
+import routes from "./routes/api.js";
 
 //middleware
 import errorHandlerMiddleware from "./middleware/error-handler.js";
@@ -35,9 +36,9 @@ if (process.env.NODE_ENV !== "production") {
 app.use(express.json());
 console.log("Helloooo");
 
-app.get("/", (req, res) => {
-  res.json({ msg: "Welcome!" });
-});
+// app.get("/", (req, res) => {
+//   res.json({ msg: "Welcome!" });
+// });
 
 app.get("/api/v1", (req, res) => {
   res.status(200).json({ msg: "API" });
@@ -45,10 +46,15 @@ app.get("/api/v1", (req, res) => {
 
 app.use("/api/v1/auth", authRouter);
 // app.use("/api/v1/auth", authenticateUser, authRouter);
-app.use("/api/v1/jobs", jobsRouter);
+
+// app.use("/api/v1/jobs", jobsRouter);
 app.use("/api/users", userRoutes);
 app.use("/api/v1/conversations", conversationRouter);
 app.use("/api/v1/messages", messageRouter);
+
+// app.use("/api/v1/jobs", jobsRouter);
+app.use("/api", routes);
+
 
 app.use(notFoundModule);
 app.use(errorHandlerMiddleware);

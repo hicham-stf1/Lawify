@@ -1,6 +1,5 @@
 import React from "react";
 import Footer from "../components/compenent-footer/Footer";
-import JobsContainer from "../components/JobsContainer";
 import NavBar from "../components/NavBar/Navbar";
 import SearchCard from "../components/SearchCard";
 export default function SearchResult() {
@@ -8,7 +7,6 @@ export default function SearchResult() {
     <div>
       <NavBar />
       {/* <SearchCard /> */}
-      <JobsContainer />
     </div>
   );
 }

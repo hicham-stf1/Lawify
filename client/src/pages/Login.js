@@ -5,6 +5,7 @@ import SignUpSwitch from "../components/SignUpSwitch";
 import { useAppContext } from "../context/appContext";
 import { useNavigate } from "react-router-dom";
 import Alert from "../components/Alert";
+import axios from "axios";
 // global context and useNavigate later
 
 const initialState = {
@@ -39,9 +40,11 @@ function Login() {
   };
 
   useEffect(() => {
+    // console.log(user.name);
     if (user) {
       // setTimeout(() => {
-      navigate("/userhome");
+        //userhome
+      navigate("/avocathome");
       // }, 3000);
     }
   }, [user, navigate]);

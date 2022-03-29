@@ -37,6 +37,10 @@ const AvocatShema = new mongoose.Schema({
     enum: ["interview", "declined", "pending"],
     default: "pending",
   },
+  role: {
+    type: String,
+    default: "Avocat",
+  },
   //   jobType: {
   //     type: String,
   //     enum: ["full-time", "part-time", "remote", "internship"],

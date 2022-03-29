@@ -36,6 +36,23 @@ export const userHomeLinks = [
     text: "Mon Profil",
   },
 ];
+export const avocatHomeLinks = [
+  {
+    id: 2,
+    url: "/MesRdv",
+    text: "Mes Rendez-vous",
+  },
+  {
+    id: 3,
+    url: "/message",
+    text: "Mes messages",
+  },
+  {
+    id: 4,
+    url: "/Profil",
+    text: "Mon Profil",
+  },
+];
 const style = { color: "red", fontSize: "1.5em" };
 export const social = [
   // {

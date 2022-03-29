@@ -52,7 +52,7 @@ class Banner extends Component {
                 Mondifier Mes Informations
               </button>
             </Link>
-            <Link to="/searchresult">
+            <Link to="/fetchtime">
               <button type="submit" className="btn btn-block button">
                 Mon Calendrier
               </button>
