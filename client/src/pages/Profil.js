@@ -1,7 +1,7 @@
 import React from 'react';
 import Banner from '../components/Banner'
 import About from '../components/About'
-import UserNavbar from "../components/NavBar/UserNavBar";
+import Navbar from "../components/NavBar/Navbar";
 import Footer from '../components/compenent-footer/Footer'
 
 import "../css/Main.css"
@@ -13,7 +13,7 @@ import "../css/Main.css"
 function Profil() {
   return (
     <div>
-      <UserNavbar />
+      <Navbar />
       <br />
       <Banner />
       <br />

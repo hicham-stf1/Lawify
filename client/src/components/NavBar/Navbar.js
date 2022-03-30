@@ -3,6 +3,7 @@ import { FaBars } from "react-icons/fa";
 import { links, social } from "./data";
 import logo from "./logo.svg";
 import "./Navbar.css";
+import { FiLogOut } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import Logo from "../Logo";
 import { useAppContext } from "../../context/appContext";
@@ -23,6 +24,11 @@ const Navbar = () => {
       linksContainerRef.current.style.height = "0px";
     }
   }, [showLinks]);
+
+  const logoutUser = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+  };
   return (
     <nav>
       <div className="nav-center">
@@ -36,15 +42,24 @@ const Navbar = () => {
         </div>
         <div className="links-container" ref={linksContainerRef}>
           <ul className="links" ref={linksRef}>
-                <li>
-                  <a href="/areyoualawyer">Vous êtes un avocat ?</a>
-                </li>
-                <li>
-                  <a href="/projects">Français</a>
-                </li>
-                <li>
-                  <a href={user? `/profile` : `/moncompte`}>{user? `Mon Profil` : `Se Connecter`}</a>
-                </li>
+            <li>
+              <a href="/areyoualawyer">Vous êtes un avocat ?</a>
+            </li>
+            <li>
+              <a href="/projects">Français</a>
+            </li>
+            <li>
+              <a href={user ? `/profile` : `/moncompte`}>
+                {user ? `Mon Profil` : `Se Connecter`}
+              </a>
+            </li>
+            { user?
+              <li>
+                <a href="/" onClick={logoutUser}>
+                  <FiLogOut title="LogOut" style={{ fontSize: "1.5em" }} />
+                </a>
+              </li> : <></>
+            }
           </ul>
         </div>
         {/* <ul className="social-icons">

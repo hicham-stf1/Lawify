@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar1";
 import ListImage from "../assets/images/img_525475.png";
 import { MdVerified, MdWork } from "react-icons/md";
 import { Link } from "react-router-dom";
+import ProfileDefault from "../assets/images/profile-default.png"
 
 class Banner extends Component {
   render() {
@@ -10,7 +11,7 @@ class Banner extends Component {
       <div class="container1">
         <div class="cover-photo">
           <img
-            src="https://images.unsplash.com/photo-1565464027194-7957a2295fb7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"
+            src={ProfileDefault}
             class="profile"
           />
           <div class="verified">
