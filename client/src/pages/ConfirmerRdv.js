@@ -68,7 +68,7 @@ function ConfirmerRdv() {
           <button type="submit" className="btn btn-block">
             Confirmer
           </button>
-          <a href="/RDV">Vous n'avez pas reçu votre code ?</a>
+          <a href="/book-appointment">Vous n'avez pas reçu votre code ?</a>
         </form>
       </Wrapper>
     </>

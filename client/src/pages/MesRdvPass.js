@@ -13,8 +13,8 @@ function MesRdvPass() {
       <UserNavbar />
       <Wrapper className="full-page">
         <nav className="RdvNav">
-          <a href="/MesRdv">Rendez-vous à venir</a>
-          <a href="/MesRdvPass">Rendez-vous passés </a>
+          <a href="/appointements">Rendez-vous à venir</a>
+          <a href="/passed-appointements">Rendez-vous passés </a>
 
           <div class="animation start-home"></div>
         </nav>

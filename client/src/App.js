@@ -30,22 +30,22 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<WelcomePage />} />
-        <Route path="/Profil" element={<Profil />} />
-        <Route path="/updateUser" element={<UserProfile />} />
-        <Route path="/MesRdv" element={<MesRdv />} />
-        <Route path="/RDV" element={<FormRdv />} />
-        <Route path="/MesRdvPass" element={<MesRdvPass />} />
-        <Route path="/Confirmation" element={<ConfirmerRdv />} />
-        <Route path="/message" element={<Chat />} />
-        <Route path="/moncompte" element={<MonCompte />} />
-        <Route path="/userhome" element={<UserHome />} />
-        <Route path="/avocathome" element={<AvocatHome />} />
-        <Route path="/areyoualawyer" element={<AreYouALawyer />} />
+        <Route path="/profile" element={<Profil />} />
+        <Route path="/update-profile" element={<UserProfile />} />
+        <Route path="/appointements" element={<MesRdv />} />
+        <Route path="/book-appointment" element={<FormRdv />} />
+        <Route path="/passed-appointements" element={<MesRdvPass />} />
+        <Route path="/appointment-confirmation" element={<ConfirmerRdv />} />
         <Route path="/registeruser" element={<UserRegister />} />
         <Route path="/registeravocat" element={<LawyerRegister />} />
         <Route path="/searchresult" element={<SearchResult />} />
         <Route path="/messenger" element={<Messenger />} />
         <Route path="/fetchtime" element={<FetchTime />} />
+        
+        <Route path="/moncompte" element={<MonCompte />} />
+        <Route path="/avocathome" element={<AvocatHome />} />
+        <Route path="/userhome" element={<UserHome />} />
+        <Route path="/areyoualawyer" element={<AreYouALawyer />} />
 
         <Route path="*" element={<Error />} />
       </Routes>{" "}

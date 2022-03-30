@@ -5,11 +5,13 @@ import logo from "./logo.svg";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import Logo from "../Logo";
+import { useAppContext } from "../../context/appContext";
 
 const Navbar = () => {
   const [showLinks, setShowLinks] = useState(false);
   const linksContainerRef = useRef(null);
   const linksRef = useRef(null);
+  const { user } = useAppContext();
   const toggleLinks = () => {
     setShowLinks(!showLinks);
   };
@@ -34,14 +36,15 @@ const Navbar = () => {
         </div>
         <div className="links-container" ref={linksContainerRef}>
           <ul className="links" ref={linksRef}>
-            {links.map((link) => {
-              const { id, url, text } = link;
-              return (
-                <li key={id}>
-                  <a href={url}>{text}</a>
+                <li>
+                  <a href="/areyoualawyer">Vous êtes un avocat ?</a>
                 </li>
-              );
-            })}
+                <li>
+                  <a href="/projects">Français</a>
+                </li>
+                <li>
+                  <a href={user? `/profile` : `/moncompte`}>{user? `Mon Profil` : `Se Connecter`}</a>
+                </li>
           </ul>
         </div>
         {/* <ul className="social-icons">

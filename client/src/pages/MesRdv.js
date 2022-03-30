@@ -15,8 +15,8 @@ function MesRdv() {
       <UserNavbar />
       <Wrapper className="full-page">
         <nav className="RdvNav">
-          <a href="/MesRdv">Rendez-vous à venir</a>
-          <a href="/MesRdvPass">Rendez-vous passés </a>
+          <a href="/appointements">Rendez-vous à venir</a>
+          <a href="/passed-appointements">Rendez-vous passés </a>
 
           <div class="animation start-home"></div>
         </nav>
@@ -36,7 +36,7 @@ function MesRdv() {
               Vous aurez rendez-vous le 1 février 2022 <br />
               14:30-14:45
             </p>
-            <a href="/message">
+            <a href="/messenger">
               <button type="submit" className="btn btn-block">
                 Envoyer un message
               </button>

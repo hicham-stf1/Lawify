@@ -34,7 +34,7 @@ function Login() {
               Welcome, <b></b>
             </p>
             <p className="logout">
-              <a id="exit" href="/MesRdv">
+              <a id="exit" href="/appointements">
                 Quitter le chat
               </a>
             </p>
