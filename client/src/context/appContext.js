@@ -42,10 +42,10 @@ export const initialState = {
   token: token,
   userLocation: userLocation || "",
   alertType: "",
-  city: "Choose one",
-  specialite: "Choose one",
-  villeOptions: ["interview", "declined", "pending"],
-  specialityOptions: ["Droit de Rien", "Droit de Sport", "Droit de la Famille"],
+  city: "choose one",
+  speciality: "choose one",
+  villeOptions: ["Rabat", "Agadir", "Casablanca"],
+  specialityOptions: ["Rien", "Sport", "Famille"],
   endTime: "",
   startTime: "",
   jobs: [],
@@ -57,7 +57,6 @@ export const initialState = {
 };
 const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
-  //   const [state, setState] = useState(initialState);
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const handleChange = ({ name, value }) => {
@@ -91,28 +90,28 @@ const AppProvider = ({ children }) => {
     dispatch({ type: LOGOUT_USER });
     removeUserFromLocalStorage();
   };
-  const registerUser = async (currentUser) => {
-    dispatch({ type: REGISTER_USER_BEGIN });
-    try {
-      const response = await axios.post("/api/v1/auth/register", currentUser);
-      // console.log(response);
-      const { user, token } = response.data;
-      dispatch({
-        type: REGISTER_USER_SUCCESS,
-        payload: {
-          user,
-          token,
-        },
-      });
-    } catch (error) {
-      console.log(error.response);
-      dispatch({
-        type: REGISTER_USER_ERROR,
-        payload: { msg: error.response.data.msg },
-      });
-    }
-    clearAlert();
-  };
+  // const registerUser = async (currentUser) => {
+  //   dispatch({ type: REGISTER_USER_BEGIN });
+  //   try {
+  //     const response = await axios.post("/api/v1/auth/register", currentUser);
+  //     // console.log(response);
+  //     const { user, token } = response.data;
+  //     dispatch({
+  //       type: REGISTER_USER_SUCCESS,
+  //       payload: {
+  //         user,
+  //         token,
+  //       },
+  //     });
+  //   } catch (error) {
+  //     console.log(error.response);
+  //     dispatch({
+  //       type: REGISTER_USER_ERROR,
+  //       payload: { msg: error.response.data.msg },
+  //     });
+  //   }
+  //   clearAlert();
+  // };
   const registerAvocat = async (currentUser) => {
     dispatch({ type: REGISTER_USER_BEGIN });
     try {
@@ -277,7 +276,6 @@ const AppProvider = ({ children }) => {
       value={{
         ...state,
         displayAlert,
-        registerUser,
         registerAvocat,
         loginUser,
         setupUser,

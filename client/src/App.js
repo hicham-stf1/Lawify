@@ -1,5 +1,4 @@
 import "./App.css";
-
 import { WelcomePage, MonCompte, AreYouALawyer, Error } from "./pages";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
@@ -23,6 +22,7 @@ import AvocatHome from "./pages/AvocatHome";
 import UserProfile from "./pages/UserProfile";
 import Footer from "./components/compenent-footer/Footer";
 import FetchTime from "./pages/FetchTime";
+import Calendar from "./pages/Calendar.js";
 
 function App() {
   return (
@@ -30,7 +30,7 @@ function App() {
       <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/Profil" element={<Profil />} />
-        {/* <Route path="/updateUser" element={<UserProfile />} /> */}
+        <Route path="/updateUser" element={<UserProfile />} />
         <Route path="/MesRdv" element={<MesRdv />} />
         <Route path="/RDV" element={<FormRdv />} />
         <Route path="/MesRdvPass" element={<MesRdvPass />} />
@@ -44,7 +44,8 @@ function App() {
         <Route path="/registeravocat" element={<LawyerRegister />} />
         <Route path="/searchresult" element={<SearchResult />} />
         <Route path="/fetchtime" element={<FetchTime />} />
-
+        <Route path="/year/:year/month/:month" element={<Calendar />} />
+        <Route path="/calender" element={<Calendar />} />
         <Route path="*" element={<Error />} />
       </Routes>{" "}
       <Footer />

@@ -43,7 +43,7 @@ function Login() {
     // console.log(user.name);
     if (user) {
       // setTimeout(() => {
-      navigate("/avocathome");
+      navigate("/userhome");
       // }, 3000);
     }
   }, [user, navigate]);

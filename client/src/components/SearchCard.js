@@ -5,24 +5,30 @@ import main from "../assets/images/Judge.svg";
 import Wrapper from "../assets/wrappers/LandingPage";
 import Wrapper1 from "../assets/wrappers/RegisterPage";
 import FormRowSelect from "../components/FormRowSelect";
+import { useAppContext } from "../context/appContext";
+import Profiles from "../pages/ProfilesForSearch/Profiles";
 
 const initialState = {
-  spécialité: "",
-  ville: "",
+  speciality: "",
+  city: "",
 };
 
 function SearchCard() {
   const [values, setValues] = useState(initialState);
 
   // global context and useNavigate later
+  const { specialityOptions, villeOptions, city, speciality } = useAppContext();
 
   const handleChange = (e) => {
-    console.log(e.target);
+    setValues({ ...values, [e.target.name]: e.target.value });
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target);
+  };
+  const addToLocalStorage = () => {
+    localStorage.setItem("city", values.city);
+    localStorage.setItem("speciality", values.speciality);
   };
 
   return (
@@ -36,25 +42,30 @@ function SearchCard() {
 
                 {/* Spécialité field */}
                 <div className="form-row">
+                  {/* Spécialité */}
                   <FormRowSelect
                     labelText="Spécialité"
-                    name="searchStatus"
-                    value="Choose One"
+                    name="speciality"
+                    value={values.speciality}
                     handleChange={handleChange}
-                    list={["all", "hhh", "hhhhhh"]}
+                    list={[speciality, ...specialityOptions]}
                   />
 
                   {/* <DropDown1 /> */}
                   <FormRowSelect
                     labelText="Ville"
-                    name="searchStatus"
-                    value="Choose One"
+                    name="city"
+                    value={values.city}
                     handleChange={handleChange}
-                    list={["all", "hhh", "hhhhhh"]}
+                    list={[city, ...villeOptions]}
                   />
                 </div>
                 <Link to="/searchresult">
-                  <button type="submit" className="btn btn-block">
+                  <button
+                    onClick={addToLocalStorage()}
+                    type="submit"
+                    className="btn btn-block"
+                  >
                     Chercher
                   </button>
                 </Link>

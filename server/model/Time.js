@@ -18,7 +18,7 @@ const BlogPostSchema = new mongoose.Schema({
   day: {
     type: String,
     required: [true, "Please provide user"],
-    enum: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
+    // enum: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
     default: "lundi",
   },
   createdBy: {
