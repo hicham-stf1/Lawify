@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Menu from "./Menu";
+import FormRow from "../../components/FormRow";
 import image from "../../assets/images/profile.jfif";
 import axios from "axios";
 import "../../css/profiles.css";
@@ -15,12 +16,16 @@ class Profiles extends React.Component {
     items: [],
     cit: "",
     specialit: "",
+    search: "",
   };
 
   componentDidMount = () => {
     this.getBlogPost();
   };
 
+  handleChange = (e) => {
+    this.setState({ ...this.state, [e.target.name]: e.target.value });
+  };
   removeFromLocalStorage = () => {
     {
       localStorage.removeItem("city");
@@ -50,35 +55,46 @@ class Profiles extends React.Component {
   };
 
   displayBlogPost = (items) => {
-    return items.map((menuItem) => {
-      const { id, name, email, city, price, speciality } = menuItem;
-      return (
-        <article key={id} className="menu-item">
-          <img
-            style={{
-              width: 150,
-              height: 150,
-              borderRadius: 400 / 2,
-              marginLeft: 80,
-            }}
-            // src={img}
-            src={image}
-            alt={name}
-            className="photo"
-          />
-          <div className="item-info">
-            <header>
-              <h5>{name}</h5>
-              <h5 className="price">{price} $/min</h5>
-            </header>
-            <p className="item-text">{speciality}</p>
-            <p className="item-text" style={{ color: "#2cb1bc" }}>
-              {city}
-            </p>
-          </div>
-        </article>
-      );
-    });
+    return items
+      .filter((menuItem) => {
+        const { name } = menuItem;
+        if (this.state.search == "") {
+          return menuItem;
+        } else if (
+          name.toLowerCase().includes(this.state.search.toLocaleLowerCase())
+        ) {
+          return menuItem;
+        }
+      })
+      .map((menuItem) => {
+        const { id, name, email, city, price, speciality } = menuItem;
+        return (
+          <article key={id} className="menu-item">
+            <img
+              style={{
+                width: 150,
+                height: 150,
+                borderRadius: 400 / 2,
+                marginLeft: 80,
+              }}
+              // src={img}
+              src={image}
+              alt={name}
+              className="photo"
+            />
+            <div className="item-info">
+              <header>
+                <h5>{name}</h5>
+                <h5 className="price">{price} $/min</h5>
+              </header>
+              <p className="item-text">{speciality}</p>
+              <p className="item-text" style={{ color: "#2cb1bc" }}>
+                {city}
+              </p>
+            </div>
+          </article>
+        );
+      });
   };
   render() {
     return (
@@ -90,6 +106,13 @@ class Profiles extends React.Component {
           </div>
 
           <div className="section-center">
+            <FormRow
+              type="text"
+              labelText="Chercher par nom "
+              name="search"
+              value={this.state.search}
+              handleChange={this.handleChange}
+            />
             {this.displayBlogPost(this.state.items)}
           </div>
         </section>
