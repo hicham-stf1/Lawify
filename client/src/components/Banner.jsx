@@ -3,17 +3,16 @@ import Navbar from "../components/Navbar1";
 import ListImage from "../assets/images/img_525475.png";
 import { MdVerified, MdWork } from "react-icons/md";
 import { Link } from "react-router-dom";
-import ProfileDefault from "../assets/images/profile-default.png"
+import ProfileDefault from "../assets/images/profile-default.png";
+import { useAppContext } from "../context/appContext";
 
 class Banner extends Component {
+  // user = useAppContext();
   render() {
     return (
       <div class="container1">
         <div class="cover-photo">
-          <img
-            src={ProfileDefault}
-            class="profile"
-          />
+          <img src={ProfileDefault} class="profile" />
           <div class="verified">
             <MdVerified />
             <p style={{ display: "inline" }}>
@@ -26,7 +25,7 @@ class Banner extends Component {
           </div>
         </div>
 
-        <div class="profile-name">Maître Prenom NOM</div>
+        <div class="profile-name">{this.props.user.name}</div>
 
         <div class="box">
           <div class="about">
