@@ -7,6 +7,8 @@ import dotenv from "dotenv";
 dotenv.config();
 import "express-async-errors";
 
+import CalenderController from "./controllers/CalenderController.js";
+
 //db and authUser
 import connectDB from "./db/connect.js";
 
@@ -16,6 +18,7 @@ import authRouter from "./routes/authRoutes.js";
 import conversationRouter from "./routes/conversations.js";
 import messageRouter from "./routes/messages.js";
 
+import calenderRouter from "./controllers/CalenderController.js";
 import routes from "./routes/api.js";
 
 //middleware
@@ -43,6 +46,8 @@ console.log("Helloooo");
 app.get("/api/v1", (req, res) => {
   res.status(200).json({ msg: "API" });
 });
+
+app.use("/api/", calenderRouter);
 
 app.use("/api/v1/auth", authRouter);
 // app.use("/api/v1/auth", authenticateUser, authRouter);

@@ -23,15 +23,8 @@ function UserRegister() {
   const [values, setValues] = useState(initialState);
 
   // global context and useNavigate later
-  const {
-    isLoading,
-    user,
-    showAlert,
-    displayAlert,
-    registerUser,
-    isMember,
-    setupUser,
-  } = useAppContext();
+  const { isLoading, user, showAlert, displayAlert, isMember, setupUser } =
+    useAppContext();
   const navigate = useNavigate();
 
   const toggleMember = () => {

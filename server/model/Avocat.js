@@ -34,12 +34,18 @@ const AvocatShema = new mongoose.Schema({
   },
   city: {
     type: String,
-    enum: ["interview", "declined", "pending"],
-    default: "pending",
+    enum: ["Agadir", "Rabat", "Casablanca"],
+    required: [true, "Please provide city"],
   },
-  role: {
+  speciality: {
     type: String,
-    default: "Avocat",
+    enum: ["Rien", "Sport", "Famille"],
+    // default: "Nothing",
+    // required: [true, "Please provide speciality"],
+  },
+  price: {
+    type: Number,
+    default: 3,
   },
   //   jobType: {
   //     type: String,

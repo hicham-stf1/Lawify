@@ -3,6 +3,7 @@ import SearchCard from "../components/SearchCard";
 import TextHeader from "../components/TextHeader";
 import Navbar from "../components/NavBar/Navbar";
 import AddTime from "./AddTime";
+import Profiles from "./ProfilesForSearch/Profiles";
 // import Dashboard from "./Dashboard";
 export default function WelcomePage() {
   return (

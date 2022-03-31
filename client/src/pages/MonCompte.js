@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../components/NavBar/Navbar";
-import Login from "./Login";
 import Footer from "../components/compenent-footer/Footer";
+import Login from "./Login.js";
 
 export default function MonCompte() {
   return (

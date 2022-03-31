@@ -1,5 +1,4 @@
 import "./App.css";
-
 import { WelcomePage, MonCompte, AreYouALawyer, Error } from "./pages";
 import Messenger from "./pages/messenger/Messenger.jsx";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
@@ -24,6 +23,7 @@ import AvocatHome from "./pages/AvocatHome";
 import UserProfile from "./pages/UserProfile";
 import Footer from "./components/compenent-footer/Footer";
 import FetchTime from "./pages/FetchTime";
+import Calendar from "./pages/Calendar.js";
 
 function App() {
   return (
@@ -36,17 +36,18 @@ function App() {
         <Route path="/book-appointment" element={<FormRdv />} />
         <Route path="/passed-appointements" element={<MesRdvPass />} />
         <Route path="/appointment-confirmation" element={<ConfirmerRdv />} />
+        <Route path="/message" element={<Chat />} />
+        <Route path="/moncompte" element={<MonCompte />} />
+        <Route path="/userhome" element={<UserHome />} />
+        <Route path="/avocathome" element={<AvocatHome />} />
+        <Route path="/areyoualawyer" element={<AreYouALawyer />} />
         <Route path="/registeruser" element={<UserRegister />} />
         <Route path="/registeravocat" element={<LawyerRegister />} />
         <Route path="/searchresult" element={<SearchResult />} />
         <Route path="/messenger" element={<Messenger />} />
         <Route path="/fetchtime" element={<FetchTime />} />
-        
-        <Route path="/moncompte" element={<MonCompte />} />
-        <Route path="/avocathome" element={<AvocatHome />} />
-        <Route path="/userhome" element={<UserHome />} />
-        <Route path="/areyoualawyer" element={<AreYouALawyer />} />
-
+        <Route path="/year/:year/month/:month" element={<Calendar />} />
+        <Route path="/calender" element={<Calendar />} />
         <Route path="*" element={<Error />} />
       </Routes>{" "}
       <Footer />

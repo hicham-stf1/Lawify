@@ -14,8 +14,9 @@ const initialState = {
   email: "",
   password: "",
   phoneNumber: "",
-  speciality: "Rien",
-  city: "Rien",
+  speciality: "",
+  price: "",
+  city: "",
 };
 // if possible prefer local state
 // global state
@@ -32,7 +33,7 @@ function LawyerRegister() {
     specialityOptions,
     villeOptions,
     city,
-    specialite,
+    speciality,
   } = useAppContext();
   const navigate = useNavigate();
 
@@ -41,7 +42,8 @@ function LawyerRegister() {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    const { name, email, password, phoneNumber, speciality, city } = values;
+    const { name, email, password, phoneNumber, speciality, city, price } =
+      values;
     if (!email || !password || !name || !phoneNumber || !city || !speciality) {
       displayAlert();
       return;
@@ -52,6 +54,7 @@ function LawyerRegister() {
       password,
       speciality,
       city,
+      price,
       phoneNumber,
     };
     registerAvocat(currentUser);
@@ -122,15 +125,23 @@ function LawyerRegister() {
               value={values.phoneNumber}
               handleChange={handleChange}
             />
+            {/* Price */}
+            <FormRow
+              type="number"
+              labelText="Prix par minute "
+              name="price"
+              value={values.price}
+              handleChange={handleChange}
+            />
             {/* Spécialité */}
             <FormRowSelect
               labelText="Spécialité"
               name="speciality"
               value={values.speciality}
               handleChange={handleChange}
-              list={[specialite, ...specialityOptions]}
+              list={[speciality, ...specialityOptions]}
             />
-            {console.log(values)}
+
             {/* Ville */}
             <FormRowSelect
               labelText="Ville"
