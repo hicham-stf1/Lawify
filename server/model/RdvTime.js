@@ -32,10 +32,10 @@ const RdvTimeSchema = mongoose.Schema({
     // default: Date.now(),
     required: [true, "Please provide Year"],
   },
-  // createdBy: {
-  //   type: mongoose.Types.ObjectId,
-  //   required: true,
-  // },
+  createdBy: {
+    type: String,
+    required: true,
+  },
 });
 
 const RDVTime = mongoose.model("RdvTime", RdvTimeSchema);

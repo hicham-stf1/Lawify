@@ -5,6 +5,7 @@ const FormRow = ({
   handleChange,
   labelText,
   value,
+  style,
 }) => {
   return (
     <div className="form-row">
@@ -13,7 +14,7 @@ const FormRow = ({
         htmlFor="name"
         className="form-label"
       >
-        {labelText || name}
+        {labelText}
       </label>
       <input
         placeholder={placeholder}
@@ -22,6 +23,7 @@ const FormRow = ({
         name={name}
         onChange={handleChange}
         className="form-input"
+        style={style}
       />
     </div>
   );

@@ -20,6 +20,9 @@ import {
 import { weekArray, gridArray } from "../constant/index";
 import { useParams } from "react-router-dom";
 
+const user = JSON.parse(localStorage.getItem("user"));
+// console.log(user._id);
+
 function Calendar() {
   const { values, setState } = useState("");
   const state = {
@@ -90,17 +93,18 @@ function Calendar() {
       date,
       startTime: data.startTime,
       endTime: data.endTime,
+      createdBy: user._id,
       data: data,
     };
     const payload = {
       startTime: data.startTime,
       endTime: data.endTime,
       date: date,
-      // createdBy: user._id,
+      createdBy: user._id,
     };
     // N.B that (startTime > endTime)
     axios({
-      url: "/api/calender/save",
+      url: "/api/save",
       method: "POST",
       data: payload,
     })

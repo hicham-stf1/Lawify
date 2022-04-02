@@ -1,8 +1,6 @@
 import { Router } from "express";
-// import Time from "../model/Time.js";
-const router = Router();
-
 import TheTime from "../model/Time.js";
+const router = Router();
 
 // Routes
 router.get("/", (req, res) => {
@@ -58,24 +56,5 @@ router.get("/name", (req, res) => {
 router.delete("/:id", async (req, res) => {
   await TheTime.findByIdAndDelete(req.params.id);
 });
-
-// export async function deleteAProduct(req, res, next) {
-//   const id = req.params.id;
-//   try {
-//     const result = await Time.findByIdAndDelete(id);
-//     // console.log(result);
-//     if (!result) {
-//       throw createError(404, "Product does not exist.");
-//     }
-//     res.send(result);
-//   } catch (error) {
-//     console.log(error.message);
-//     if (error instanceof mongoose.CastError) {
-//       next(createError(400, "Invalid Product id"));
-//       return;
-//     }
-//     next(error);
-//   }
-// }
 
 export default router;

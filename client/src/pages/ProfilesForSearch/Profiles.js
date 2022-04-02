@@ -4,6 +4,7 @@ import FormRow from "../../components/FormRow";
 import image from "../../assets/images/profile.jfif";
 import axios from "axios";
 import "../../css/profiles.css";
+import styled from "styled-components";
 import SearchCard from "../../components/SearchCard";
 
 class Profiles extends React.Component {
@@ -101,18 +102,19 @@ class Profiles extends React.Component {
       <main>
         <section className="menu section">
           <div className="title">
-            <h2>The Hedear</h2>
+            {/* <h2>The Hedear</h2> */}
+            <FormRow
+              style={{ justifyContent: "center", marginTop: 15, width: 300 }}
+              type="text"
+              name="search"
+              placeholder="entrer le nom d'un avocat .."
+              value={this.state.search}
+              handleChange={this.handleChange}
+            />
             <div className="underline"></div>
           </div>
 
           <div className="section-center">
-            <FormRow
-              type="text"
-              labelText="Chercher par nom "
-              name="search"
-              value={this.state.search}
-              handleChange={this.handleChange}
-            />
             {this.displayBlogPost(this.state.items)}
           </div>
         </section>
@@ -122,3 +124,13 @@ class Profiles extends React.Component {
 }
 
 export default Profiles;
+
+const EmptyContainer = styled.section`
+  text-align: center;
+  h5 {
+    text-transform: none;
+  }
+  span {
+    color: var(--primary-500);
+  }
+`;
