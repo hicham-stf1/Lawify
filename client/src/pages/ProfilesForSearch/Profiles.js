@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import Menu from "./Menu";
 import FormRow from "../../components/FormRow";
 import image from "../../assets/images/profile.jfif";
 import axios from "axios";
 import "../../css/profiles.css";
 import styled from "styled-components";
 import SearchCard from "../../components/SearchCard";
+import { Link } from "react-router-dom";
+import AvailabilitySlots from "../AvailabilitySlots";
+import { GiPositionMarker } from "react-icons/gi";
 
 class Profiles extends React.Component {
   state = {
@@ -90,8 +92,23 @@ class Profiles extends React.Component {
               </header>
               <p className="item-text">{speciality}</p>
               <p className="item-text" style={{ color: "#2cb1bc" }}>
-                {city}
+                <GiPositionMarker /> {city}
               </p>
+              <Link to="/availibilityslots" style={{ textDecoration: "none" }}>
+                <p
+                  className="item-text"
+                  style={{
+                    color: "black",
+                    backgroundColor: "#bef8fd",
+                    padding: "12px",
+                    borderRadius: "12px",
+                    marginTop: "14px",
+                    font: "caption",
+                  }}
+                >
+                  Voir le créneaux de disponibilité
+                </p>
+              </Link>
             </div>
           </article>
         );

@@ -23,6 +23,7 @@ import UserProfile from "./pages/UserProfile";
 import Footer from "./components/compenent-footer/Footer";
 import FetchTime from "./pages/FetchTime";
 import Calendar from "./pages/Calendar.js";
+import AvailabilitySlots from "./pages/AvailabilitySlots";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         <Route path="/fetchtime" element={<FetchTime />} />
         <Route path="/year/:year/month/:month" element={<Calendar />} />
         <Route path="/calender" element={<Calendar />} />
+        <Route path="/availibilityslots" element={<AvailabilitySlots />} />
         <Route path="*" element={<Error />} />
       </Routes>{" "}
       <Footer />
