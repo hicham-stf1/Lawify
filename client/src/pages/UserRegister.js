@@ -80,6 +80,7 @@ function UserRegister() {
             <FormRow
               placeholder="Your name"
               type="text"
+              labelText="name"
               name="name"
               value={values.name}
               handleChange={handleChange}
@@ -90,6 +91,7 @@ function UserRegister() {
               placeholder="example@gmail.com"
               type="email"
               name="email"
+              labelText="email"
               value={values.email}
               handleChange={handleChange}
             />
@@ -98,6 +100,7 @@ function UserRegister() {
               placeholder="06 ** ** ** **"
               type="Number"
               name="phoneNumber"
+              labelText="number"
               value={values.phoneNumber}
               handleChange={handleChange}
             />
@@ -106,6 +109,7 @@ function UserRegister() {
               placeholder="Your password"
               type="password"
               name="password"
+              labelText="password"
               value={values.password}
               handleChange={handleChange}
             />

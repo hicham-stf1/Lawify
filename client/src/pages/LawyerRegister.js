@@ -91,6 +91,7 @@ function LawyerRegister() {
             <FormRow
               type="text"
               name="name"
+              labelText="name"
               value={values.name}
               handleChange={handleChange}
             />

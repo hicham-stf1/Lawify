@@ -4,7 +4,10 @@ import TextHeader from "../components/TextHeader";
 import Navbar from "../components/NavBar/Navbar";
 import AddTime from "./AddTime";
 import Profiles from "./ProfilesForSearch/Profiles";
-// import Dashboard from "./Dashboard";
+import SchedulerCalendar from "scheduler-calendar";
+import "scheduler-calendar/dist/index.css";
+import ScheduleSelector from "react-schedule-selector";
+
 export default function WelcomePage() {
   return (
     <div>

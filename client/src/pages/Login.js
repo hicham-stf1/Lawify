@@ -43,7 +43,7 @@ function Login() {
     // console.log(user.name);
     if (user) {
       // setTimeout(() => {
-      navigate("/userhome");
+      navigate("/avocathome");
       // }, 3000);
     }
   }, [user, navigate]);
@@ -58,6 +58,7 @@ function Login() {
           <FormRow
             type="email"
             name="email"
+            labelText="email"
             value={values.email}
             handleChange={handleChange}
           />
@@ -65,6 +66,7 @@ function Login() {
           <FormRow
             type="password"
             name="password"
+            labelText="password"
             value={values.password}
             handleChange={handleChange}
           />

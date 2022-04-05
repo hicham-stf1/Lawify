@@ -47,7 +47,7 @@ function MesRdv() {
           </div>
         </div>
       </Wrapper>
-      <FetchTime />
+      {/* <FetchTime /> */}
     </>
   );
 }

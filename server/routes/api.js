@@ -88,10 +88,6 @@ router.get("/v1/cities", async (req, res) => {
   }
 });
 
-
-
-
-
 router.post("/v1/cities", async (req, res) => {
   const newCity = new City(req.body);
   try {
