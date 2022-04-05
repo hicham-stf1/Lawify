@@ -73,7 +73,7 @@
   width: 80%;
   box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.75);
 }
-.profile-title {
+.section-header {
   text-align: center;
   background-color: #ddf0f1;
   border-style: hidden hidden solid hidden;
@@ -85,6 +85,16 @@
   color: black;
   font-weight: bold;
   font-style: italic;
+}
+
+.section-title{
+  display: inline;
+}
+
+.editButton{
+  float:right;
+  width:100px;
+  height: 35px;
 }
 
 .cover-photo {

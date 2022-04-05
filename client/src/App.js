@@ -21,6 +21,7 @@ import Profil from "./pages/Profil";
 import LawyerRegister from "./pages/LawyerRegister";
 import AvocatHome from "./pages/AvocatHome";
 import UserProfile from "./pages/UserProfile";
+import UpdateAvocat from "./pages/UpdateAvocat";
 import Footer from "./components/compenent-footer/Footer";
 import FetchTime from "./pages/FetchTime";
 import Calendar from "./pages/Calendar.js";
@@ -36,6 +37,7 @@ function App() {
         <Route path="/book-appointment" element={<FormRdv />} />
         <Route path="/passed-appointements" element={<MesRdvPass />} />
         <Route path="/appointment-confirmation" element={<ConfirmerRdv />} />
+        <Route path="/update-avocat" element={<UpdateAvocat/>} />
         <Route path="/message" element={<Chat />} />
         <Route path="/moncompte" element={<MonCompte />} />
         <Route path="/userhome" element={<UserHome />} />

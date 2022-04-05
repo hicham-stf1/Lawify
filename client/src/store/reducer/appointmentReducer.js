@@ -1,8 +1,14 @@
+import axios from "axios";
+
 const getDataFromLocal = () => {
     return JSON.parse(localStorage.getItem('appointMentData'))
 }
 
-const initialState = getDataFromLocal() || [];
+const getDataFromDatabase = () => {
+    return axios.get('http://localhost:5000/api/v1/calender')
+}
+
+const initialState = getDataFromDatabase() || [];
 
 const reducer = (state = initialState, action) => {
 

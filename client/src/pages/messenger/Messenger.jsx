@@ -37,27 +37,22 @@ function Messenger() {
   }, [arrivalMessage, currentChat]);
 
   useEffect(() => {
-    socket.current.emit("addUser", user._id);
-    socket.current.on("getUsers", (users) => {
-      setOnlineUsers(
-        user.followings.filter((f) => users.some((u) => u.userId === f))
-      );
-    });
-  }, [user]);
+    socket.current.emit("addUser", userr._id);
+  }, [userr]);
 
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const res = await axios.get("/api/v1/conversations/" + user._id);
+        const res = await axios.get("/api/v1/conversations/" + userr._id);
         setConversations(res.data);
         console.log(res);
-        console.log(user.name);
+        console.log(userr.name);
       } catch (err) {
         console.log(err);
       }
     };
     getConversations();
-  }, []);
+  }, [userr]);
 
   useEffect(() => {
     const getMessages = async () => {
@@ -80,11 +75,11 @@ function Messenger() {
     };
 
     const receiverId = currentChat.members.find(
-      (member) => member !== user._id
+      (member) => member !== userr._id
     );
 
     socket.current.emit("sendMessage", {
-      senderId: user._id,
+      senderId: userr._id,
       receiverId,
       text: newMessage,
     });

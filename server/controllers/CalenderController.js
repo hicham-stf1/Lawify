@@ -38,7 +38,7 @@ router.get("/avocats", (req, res) => {
     });
 });
 
-router.post("/save", (req, res) => {
+router.post("/calender/save", (req, res) => {
   const data = req.body;
 
   const newRdvTime = new RdvTime(data);
