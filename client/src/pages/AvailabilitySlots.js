@@ -13,6 +13,7 @@ export default class AvailabilitySlots extends React.Component {
   renderCustomDateCell = (time, selected, innerRef) => (
     <div style={{ textAlign: "center" }} ref={innerRef}>
       {selected ? "✅" : "❌"}
+      {/* ✅ */}
     </div>
   );
 
@@ -27,6 +28,7 @@ export default class AvailabilitySlots extends React.Component {
             width: "80%",
             marginTop: "40px",
             marginLeft: "10%",
+            flexDirection: "column",
             marginBottom: "30px",
           }}
         >
@@ -44,8 +46,34 @@ export default class AvailabilitySlots extends React.Component {
             // renderTimeLabel={this.renderCustomDateCell}
             // renderDateLabel={this.renderCustomDateCell}
             onChange={this.handleChange}
-            // renderDateCell={this.renderCustomDateCell}
+            renderDateCell={this.renderCustomDateCell}
           />
+        </div>
+        <div style={{ flexDirection: "row", display: "flex" }}>
+          <h5
+            style={{
+              justifyContent: "center",
+              marginTop: "40px",
+              marginLeft: "30%",
+              flexDirection: "column",
+              marginBottom: "30px",
+            }}
+          >
+            {" "}
+            ✅ : Disponible
+          </h5>
+          <h5
+            style={{
+              justifyContent: "center",
+              marginTop: "40px",
+              marginLeft: "10%",
+              flexDirection: "column",
+              marginBottom: "30px",
+            }}
+          >
+            {" "}
+            ❌ : Non Disponible
+          </h5>
         </div>
       </div>
     );

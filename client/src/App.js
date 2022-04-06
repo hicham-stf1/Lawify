@@ -26,6 +26,7 @@ import Footer from "./components/compenent-footer/Footer";
 import FetchTime from "./pages/FetchTime";
 import Calendar from "./pages/Calendar.js";
 import AvailabilitySlots from "./pages/AvailabilitySlots";
+import Requests from "./pages/AdminPanel/Requests";
 
 function App() {
   return (
@@ -38,7 +39,7 @@ function App() {
         <Route path="/book-appointment" element={<FormRdv />} />
         <Route path="/passed-appointements" element={<MesRdvPass />} />
         <Route path="/appointment-confirmation" element={<ConfirmerRdv />} />
-        <Route path="/update-avocat" element={<UpdateAvocat/>} />
+        <Route path="/update-avocat" element={<UpdateAvocat />} />
         <Route path="/message" element={<Chat />} />
         <Route path="/moncompte" element={<MonCompte />} />
         <Route path="/userhome" element={<UserHome />} />
@@ -54,7 +55,7 @@ function App() {
         <Route path="/availibilityslots" element={<AvailabilitySlots />} />
         <Route path="*" element={<Error />} />
       </Routes>{" "}
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import FormRow from "../../components/FormRow";
-import image from "../../assets/images/profile.jfif";
+// import image from "../../assets/images/profile.jfif";
 import axios from "axios";
 import "../../css/profiles.css";
 import styled from "styled-components";
@@ -20,6 +20,7 @@ class Profiles extends React.Component {
     cit: "",
     specialit: "",
     search: "",
+    image: "",
   };
 
   componentDidMount = () => {
@@ -70,20 +71,20 @@ class Profiles extends React.Component {
         }
       })
       .map((menuItem) => {
-        const { id, name, email, city, price, speciality } = menuItem;
+        const { id, name, email, city, price, speciality, image } = menuItem;
         return (
           <article key={id} className="menu-item">
             <img
               style={{
-                width: 150,
-                height: 150,
-                borderRadius: 400 / 2,
-                marginLeft: 80,
+                width: "130px",
+                height: "130px",
+                borderRadius: "50%",
+                objectFit: "cover",
+                marginBottom: " 0.75rem",
               }}
-              // src={img}
               src={image}
               alt={name}
-              className="photo"
+              // className="photo"
             />
             <div className="item-info">
               <header>
@@ -119,11 +120,17 @@ class Profiles extends React.Component {
       <main>
         <section className="menu section">
           <div className="title">
-            {/* <h2>The Hedear</h2> */}
+            <h5>
+              Il vous suffit de sélectionner l'avocat de votre choix, de
+              compléter vos coordonnées et la mise en relation est directe et
+              instantanée.
+            </h5>
+
             <FormRow
-              style={{ justifyContent: "center", marginTop: 15, width: 300 }}
+              style={{ justifyContent: "center", marginTop: 30, width: 400 }}
               type="text"
               name="search"
+              // labelText="Search"
               placeholder="entrer le nom d'un avocat .."
               value={this.state.search}
               handleChange={this.handleChange}

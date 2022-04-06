@@ -8,6 +8,7 @@ import FormRowSelect from "../components/FormRowSelect";
 // global context and useNavigate later
 import { useAppContext } from "../context/appContext";
 import Alert from "../components/Alert";
+import FileBase from "react-file-base64";
 
 const initialState = {
   name: "",
@@ -17,6 +18,7 @@ const initialState = {
   speciality: "",
   price: "",
   city: "",
+  image: "",
 };
 // if possible prefer local state
 // global state
@@ -42,10 +44,25 @@ function LawyerRegister() {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    const { name, email, password, phoneNumber, speciality, city, price } =
-      values;
-    console.log(speciality);
-    if (!email || !password || !name || !phoneNumber || !city || !speciality) {
+    const {
+      name,
+      email,
+      password,
+      phoneNumber,
+      speciality,
+      city,
+      price,
+      image,
+    } = values;
+    if (
+      !email ||
+      !password ||
+      !name ||
+      !phoneNumber ||
+      !city ||
+      !speciality ||
+      !image
+    ) {
       displayAlert();
       return;
     }
@@ -57,6 +74,7 @@ function LawyerRegister() {
       city,
       price,
       phoneNumber,
+      image,
     };
     registerAvocat(currentUser);
     console.log(values);
@@ -64,6 +82,7 @@ function LawyerRegister() {
 
   return (
     <div>
+      {/* <pre>{JSON.stringify(item, null, "\t")}</pre> */}
       <Navbar />
       <Wrapper>
         <form className="form" onSubmit={onSubmit}>
@@ -97,12 +116,7 @@ function LawyerRegister() {
               handleChange={handleChange}
             />
             {/* Prénom */}
-            {/* <FormRow
-              type="text"
-              name=""
-              // value={position}
-              // handleChange={h andleCahandleChange}
-            /> */}
+
             {/* Email */}
             <FormRow
               labelText="Email"
@@ -152,6 +166,22 @@ function LawyerRegister() {
               handleChange={handleChange}
               list={[city, ...villeOptions]}
             />
+            {/* Image  */}
+            <div className="form-row">
+              {" "}
+              <label className="form-label">Photo de profil</label>
+              <div className="form-input">
+                <FileBase
+                  type="file"
+                  name="image"
+                  multiple={false}
+                  onDone={({ base64 }) =>
+                    setValues({ ...values, image: base64 })
+                  }
+                />
+              </div>
+            </div>
+
             <div className="btn-container">
               <button
                 type="submit"

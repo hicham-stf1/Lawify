@@ -6,6 +6,7 @@ const FormRow = ({
   labelText,
   value,
   style,
+  onDone,
 }) => {
   return (
     <div className="form-row">
@@ -17,6 +18,7 @@ const FormRow = ({
         {labelText}
       </label>
       <input
+        onDone={onDone}
         placeholder={placeholder}
         type={type}
         value={value}
