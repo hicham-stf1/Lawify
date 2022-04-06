@@ -67,7 +67,7 @@ app.use("/api/v1/conversations", conversationRouter);
 app.use("/api/v1/messages", messageRouter);
 
 // app.use("/api/v1/jobs", jobsRouter);
-// app.use("/api", routes);
+app.use("/api", CalenderController);
 
 app.use(notFoundModule);
 app.use(errorHandlerMiddleware);
