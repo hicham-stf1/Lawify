@@ -36,7 +36,6 @@ function Login() {
     }
     const currentUser = { email, password };
     loginUser(currentUser);
-    console.log(values);
   };
 
   useEffect(() => {

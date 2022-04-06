@@ -1,5 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
+// import cors from "cors";
+
 const app = express();
 import cors from "cors";
 
@@ -10,13 +12,18 @@ dotenv.config();
 import "express-async-errors";
 
 import CalenderController from "./controllers/CalenderController.js";
+app.use(cors());
 
 //db and authUser
 import connectDB from "./db/connect.js";
 
 // routers
+import userRoutes from "./routes/userRoutes.js";
 import authRouter from "./routes/authRoutes.js";
-import calenderRouter from "./controllers/CalenderController.js";
+import conversationRouter from "./routes/conversations.js";
+import messageRouter from "./routes/messages.js";
+
+import calenderRouter from "./routes/CalenderRoutes.js";
 import routes from "./routes/api.js";
 
 //middleware
@@ -49,12 +56,18 @@ app.get("/api/v1", (req, res) => {
   res.status(200).json({ msg: "API" });
 });
 
-app.use("/api/", calenderRouter);
+app.use("/api/v1/calender", calenderRouter);
 
 app.use("/api/v1/auth", authRouter);
 // app.use("/api/v1/auth", authenticateUser, authRouter);
+
 // app.use("/api/v1/jobs", jobsRouter);
-app.use("/api", routes);
+app.use("/api/users", userRoutes);
+app.use("/api/v1/conversations", conversationRouter);
+app.use("/api/v1/messages", messageRouter);
+
+// app.use("/api/v1/jobs", jobsRouter);
+// app.use("/api", routes);
 
 app.use(notFoundModule);
 app.use(errorHandlerMiddleware);

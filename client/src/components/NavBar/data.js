@@ -22,34 +22,34 @@ export const links = [
 export const userHomeLinks = [
   {
     id: 2,
-    url: "/MesRdv",
+    url: "/appointements",
     text: "Mes Rendez-vous",
   },
   {
     id: 3,
-    url: "/message",
+    url: "/messenger",
     text: "Mes messages",
   },
   {
     id: 4,
-    url: "/updateUser",
+    url: "/update-profile",
     text: "Mon Profil",
   },
 ];
 export const avocatHomeLinks = [
   {
     id: 2,
-    url: "/MesRdv",
+    url: "/appointements",
     text: "Mes Rendez-vous",
   },
   {
     id: 3,
-    url: "/message",
+    url: "/messenger",
     text: "Mes messages",
   },
   {
     id: 4,
-    url: "/Profil",
+    url: "/profile",
     text: "Mon Profil",
   },
 ];

@@ -87,14 +87,47 @@ const AvocatShema = new mongoose.Schema({
   },
   speciality: {
     type: String,
-    enum: ["Droit de Sport ", "Droit de Famille"],
-    // required: [true, "Please provide speciality"],
+    enum: ["Rien", "Sport", "Famille"],
+    // default: "Nothing",
+    required: [true, "Please provide speciality"],
   },
   price: {
     type: Number,
     default: 3,
   },
   image: String,
+  onlineService: {
+    type: Boolean,
+  },
+  cabinetService: {
+    type: Boolean,
+  },
+  presentation: {
+    type: String,
+  },
+  competences: {
+    type: Array,
+    default: [],
+  },
+  adresse: {
+    type: String,
+  },
+  website: {
+    type: String,
+  },
+  tele: {
+    type: String,
+  },
+
+  langues: {
+    type: Array,
+  },
+  formations: {
+    type: Array,
+  },
+  Tarifs: {
+    type: Array,
+  },
 });
 
 AvocatShema.pre("save", async function () {

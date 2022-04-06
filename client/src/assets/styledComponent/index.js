@@ -89,6 +89,19 @@ export const InputSpan = styled.div`
   width: 30%;
 `;
 
+export const TextArea = styled.textarea`
+  width: 80%;
+  margin-top: 130px;
+  margin-right: 10px;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+`;
 export const InputField = styled.input`
   width: 70%;
   height: 25px;
@@ -108,13 +121,31 @@ export const ModalFooter = styled.div`
 export const ModalSubmit = styled.button`
   width: 40%;
   height: 40px;
+  margin-bottom: 0px;
+  background: #228c22;
+  color: #fff;
+`;
+export const ModalCancel = styled.button`
+  width: 40%;
+  margin-bottom: 0px;
+  height: 40px;
+  background: #f68a06;
+  color: #fff;
+`;
+export const ModalSubmit2 = styled.button`
+  width: 40%;
+  margin-top: 130px;
+  height: 40px;
+  margin-bottom: 0px;
   background: #228c22;
   color: #fff;
 `;
 
-export const ModalCancel = styled.button`
+export const ModalCancel2 = styled.button`
   width: 40%;
+  margin-bottom: 0px;
   height: 40px;
+  margin-top: 130px;
   background: #f68a06;
   color: #fff;
 `;
@@ -135,7 +166,21 @@ export const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    width: "350px",
+    width: "500px",
+    padding: "10px",
+    border: "1px solid #000",
+  },
+};
+export const presentationCustomStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    width: "500px",
+    height: "300px",
     padding: "10px",
     border: "1px solid #000",
   },
@@ -158,4 +203,52 @@ export const AppointmentButton = styled.button`
   padding: 10px;
   font-size: 16px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+`;
+
+export const TagInput = styled.div`
+  .App {
+    font-family: sans-serif;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    margin-top: 50px;
+  }
+
+  .tag-container {
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    min-width: 60%;
+    max-width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 30px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  .tag {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    height: 25px;
+    margin: 2px 5px 2px 0px;
+    color: Black;
+  }
+
+  .tag-container input {
+    border: none;
+    flex: 1;
+    outline: none;
+    padding: 5;
+    color: Black;
+  }
+  .tag span {
+    margin-left: 5px;
+    cursor: pointer;
+  }
 `;

@@ -1,5 +1,6 @@
 import "./App.css";
 import { WelcomePage, MonCompte, AreYouALawyer, Error } from "./pages";
+import Messenger from "./pages/messenger/Messenger.jsx";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 //This need a refactor later
@@ -20,6 +21,7 @@ import Profil from "./pages/Profil";
 import LawyerRegister from "./pages/LawyerRegister";
 import AvocatHome from "./pages/AvocatHome";
 import UserProfile from "./pages/UserProfile";
+import UpdateAvocat from "./pages/UpdateAvocat";
 import Footer from "./components/compenent-footer/Footer";
 import FetchTime from "./pages/FetchTime";
 import Calendar from "./pages/Calendar.js";
@@ -31,14 +33,14 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/requestDetails" element={<RequestDetails />} />
         <Route path="/" element={<WelcomePage />} />
-        <Route path="/Profil" element={<Profil />} />
-        <Route path="/updateUser" element={<UserProfile />} />
-        <Route path="/MesRdv" element={<MesRdv />} />
-        <Route path="/RDV" element={<FormRdv />} />
-        <Route path="/MesRdvPass" element={<MesRdvPass />} />
-        <Route path="/Confirmation" element={<ConfirmerRdv />} />
+        <Route path="/profile" element={<Profil />} />
+        <Route path="/update-profile" element={<UserProfile />} />
+        <Route path="/appointements" element={<MesRdv />} />
+        <Route path="/book-appointment" element={<FormRdv />} />
+        <Route path="/passed-appointements" element={<MesRdvPass />} />
+        <Route path="/appointment-confirmation" element={<ConfirmerRdv />} />
+        <Route path="/update-avocat" element={<UpdateAvocat />} />
         <Route path="/message" element={<Chat />} />
         <Route path="/moncompte" element={<MonCompte />} />
         <Route path="/userhome" element={<UserHome />} />
@@ -47,6 +49,7 @@ function App() {
         <Route path="/registeruser" element={<UserRegister />} />
         <Route path="/registeravocat" element={<LawyerRegister />} />
         <Route path="/searchresult" element={<SearchResult />} />
+        <Route path="/messenger" element={<Messenger />} />
         <Route path="/fetchtime" element={<FetchTime />} />
         <Route path="/year/:year/month/:month" element={<Calendar />} />
         <Route path="/calender" element={<Calendar />} />

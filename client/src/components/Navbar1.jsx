@@ -1,14 +1,23 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 class Navbar extends Component {
-    render() {
-        return (
-            <nav className="navbar">
-                <a href="#home"><i className="fa fa-fw fa-home"></i>Home</a>
-                <a href="#banner"><i className="fa fa-fw fa-user"></i>Plus d'information</a>
-                <a href="#contactnav"><i className="fa fa-fw fa-envelope"></i>Contact</a>
-            </nav>
-        )
-    }
+  render() {
+    return (
+      <nav className="navbar">
+        <a className="navbar-button" href="#presentation">
+          Présentation
+        </a>
+        <a className="navbar-button" href="#competences">
+          Compétences
+        </a>
+        <a className="navbar-button" href="#coordonnees">
+          Coordonnées
+        </a>
+        <a className="navbar-button" href="#infos">
+          Informations Supplaimentaires
+        </a>
+      </nav>
+    );
+  }
 }
 
-export default Navbar
+export default Navbar;

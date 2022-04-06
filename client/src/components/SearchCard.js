@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import main from "../assets/images/Judge.svg";
+import axios from "axios";
 import Wrapper from "../assets/wrappers/LandingPage";
 import Wrapper1 from "../assets/wrappers/RegisterPage";
 import FormRowSelect from "../components/FormRowSelect";
@@ -14,13 +15,42 @@ const initialState = {
 };
 
 function SearchCard() {
+  const [cities, setCities] = useState();
+  const [specialities, setSpecialities] = useState();
   const [values, setValues] = useState(initialState);
+
+  useEffect(() => {
+    const getCities = async () => {
+      try {
+        const res = await axios.get("/api/v1/cities");
+        setCities(res.data);
+        console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getCities();
+  }, []);
+
+  useEffect(() => {
+    const getSpecialities = async () => {
+      try {
+        const res = await axios.get("/api/v1/specialities");
+        setSpecialities(res.data);
+        console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getSpecialities();
+  }, []);
 
   // global context and useNavigate later
   const { specialityOptions, villeOptions, city, speciality } = useAppContext();
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
+    console.log(values);
   };
 
   const onSubmit = (e) => {

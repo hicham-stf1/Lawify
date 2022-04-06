@@ -1,19 +1,21 @@
 import React from "react";
 import Banner from "../components/Banner";
 import About from "../components/About";
-import UserNavbar from "../components/NavBar/UserNavBar";
-import Footer from "../components/compenent-footer/Footer";
-
+import Navbar from "../components/NavBar/Navbar";
+import { useEffect, useRef, useState } from "react";
 import "../css/Main.css";
+import { useAppContext } from "../context/appContext";
 
 function Profil() {
+  const { user } = useAppContext();
+  const [userr, setUserr] = useState(user);
   return (
     <div>
-      <UserNavbar />
+      <Navbar />
       <br />
-      <Banner />
+      <Banner user={userr} />
       <br />
-      <About />
+      <About user={userr} />
       <br />
     </div>
   );

@@ -1,6 +1,9 @@
-import { Router } from "express";
+import express from "express";
+const router = express.Router();
+
 import TheTime from "../model/Time.js";
-const router = Router();
+import City from "../model/City.js";
+import Speciality from "../model/Speciality.js";
 
 // Routes
 router.get("/", (req, res) => {
@@ -55,6 +58,63 @@ router.get("/name", (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   await TheTime.findByIdAndDelete(req.params.id);
+});
+
+// export async function deleteAProduct(req, res, next) {
+//   const id = req.params.id;
+//   try {
+//     const result = await Time.findByIdAndDelete(id);
+//     // console.log(result);
+//     if (!result) {
+//       throw createError(404, "Product does not exist.");
+//     }
+//     res.send(result);
+//   } catch (error) {
+//     console.log(error.message);
+//     if (error instanceof mongoose.CastError) {
+//       next(createError(400, "Invalid Product id"));
+//       return;
+//     }
+//     next(error);
+//   }
+// }
+
+router.get("/v1/cities", async (req, res) => {
+  try {
+    const cities = await City.find({});
+    res.status(200).json(cities);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.post("/v1/cities", async (req, res) => {
+  const newCity = new City(req.body);
+  try {
+    const savedCity = await newCity.save();
+    res.status(200).json(savedCity);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/v1/specialities", async (req, res) => {
+  try {
+    const specialities = await Speciality.find({});
+    res.status(200).json(specialities);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.post("/v1/specialities", async (req, res) => {
+  const newSpeciality = new Speciality(req.body);
+  try {
+    const savedSpeciality = await newSpeciality.save();
+    res.status(200).json(savedSpeciality);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 export default router;
