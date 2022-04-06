@@ -24,12 +24,13 @@ import Footer from "./components/compenent-footer/Footer";
 import FetchTime from "./pages/FetchTime";
 import Calendar from "./pages/Calendar.js";
 import AvailabilitySlots from "./pages/AvailabilitySlots";
+import Requests from "./pages/AdminPanel/Requests";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<WelcomePage />} />
+        <Route path="/" element={<Requests />} />
         <Route path="/Profil" element={<Profil />} />
         <Route path="/updateUser" element={<UserProfile />} />
         <Route path="/MesRdv" element={<MesRdv />} />
@@ -50,7 +51,7 @@ function App() {
         <Route path="/availibilityslots" element={<AvailabilitySlots />} />
         <Route path="*" element={<Error />} />
       </Routes>{" "}
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 }

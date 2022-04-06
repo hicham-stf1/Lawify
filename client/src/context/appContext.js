@@ -93,7 +93,7 @@ export const initialState = {
     "Tiznit",
     "Touissite",
   ],
-  specialityOptions: ["Rien", "Sport", "Famille"],
+  specialityOptions: ["Droit de Sport ", "Droit de Famille"],
   endTime: "",
   startTime: "",
   jobs: [],
@@ -167,14 +167,14 @@ const AppProvider = ({ children }) => {
         "/api/v1/auth/registerAvocat",
         currentUser
       );
+      window.location.href = "/avocathome";
       // console.log(response);
-      const { user, token, location } = response.data;
+      const { user, token } = response.data;
       dispatch({
         type: REGISTER_USER_SUCCESS,
         payload: {
           user,
           token,
-          location,
         },
       });
       // addUserToLocalStorage({
@@ -218,11 +218,11 @@ const AppProvider = ({ children }) => {
     dispatch({ type: LOGIN_USER_BEGIN });
     try {
       const { data } = await axios.post("/api/v1/auth/login", currentUser);
-      const { user, token, location } = data;
+      const { user, token } = data;
 
       dispatch({
         type: LOGIN_USER_SUCCESS,
-        payload: { user, token, location },
+        payload: { user, token },
       });
 
       addUserToLocalStorage({ user, token });
