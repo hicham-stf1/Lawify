@@ -44,6 +44,7 @@ function LawyerRegister() {
     e.preventDefault();
     const { name, email, password, phoneNumber, speciality, city, price } =
       values;
+    console.log(speciality);
     if (!email || !password || !name || !phoneNumber || !city || !speciality) {
       displayAlert();
       return;

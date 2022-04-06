@@ -1,5 +1,8 @@
 import Modal from "react-modal";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { useAppContext } from "../context/appContext";
+
 import axios from "axios";
 import {
   ModalCancel2,
@@ -13,23 +16,17 @@ import {
   ModalHeader,
 } from "../assets/styledComponent/index";
 
-
 function EditPresentationForm(props) {
-  const { register, handleSubmit } = useForm();
+  const [presentation, setPresentation] = useState(props.user.presentation);
+  const { showAlert, displayAlert, updateUser, isLoading } = useAppContext();
 
-  const state = {
-    startTime: "",
-    endTime: "",
-    day: "",
-    month: "",
-    year: "",
-    // date: "",
-  };
-
-  const onSubmit = (data) => {
-      console.log(data);
-      props.onModalSubmit(data);
-      props.openModal();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!presentation) {
+      displayAlert();
+      return;
+    }
+    updateUser({ presentation });
   };
 
   return (
@@ -41,17 +38,17 @@ function EditPresentationForm(props) {
       contentLabel="Example Modal"
     >
       <ModalHeader>Modifier votre presentation</ModalHeader>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit}>
         <ModalBody>
           <InputContainer>
             <InputSpan>Presentation :</InputSpan>
             <TextArea
-              {...register("presentation")}
+              value={presentation}
+              onChange={(e) => setPresentation(e.target.value)}
               type="textarea"
               placeholder="Saisir votre nouvelle presentation"
             ></TextArea>
           </InputContainer>
-
         </ModalBody>
         <ModalFooter>
           <ModalSubmit2>Submit</ModalSubmit2>

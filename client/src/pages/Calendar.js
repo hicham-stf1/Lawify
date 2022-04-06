@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import { useDispatch } from "react-redux";
-import { bindActionCreators } from "redux";
+
 import NavBar from "../components/NavBar/Navbar.js";
 import CalenderHeader from "../components/calenderHeader";
 import DateComponent from "../components/dateContainer";
-import * as actionCreators from "../store/actions/index";
 import FormModal from "../components/FormModal";
 import axios from "axios";
 import {
@@ -21,22 +19,15 @@ import { weekArray, gridArray } from "../constant/index";
 import { useParams } from "react-router-dom";
 
 const user = JSON.parse(localStorage.getItem("user"));
-// console.log(user._id);
 
 function Calendar() {
-  const { values, setState } = useState("");
-  const state = {
-    posts: [],
-  };
-  const dispatch = useDispatch();
-
   const { year, month } = useParams();
 
   const [selectedYear, setSelectedYear] = useState(2022);
   const [selectedMonth, setSelectedMonth] = useState(0);
   const [modalState, setModalState] = useState(false);
-
-  const { addAppointment } = bindActionCreators(actionCreators, dispatch);
+  const [appointments, setAppointments] = useState([]);
+  const [userr, setUserr] = useState(user);
 
   const startOfDay = moment()
     .year(selectedYear)
@@ -87,15 +78,22 @@ function Calendar() {
   //     });
   // };
 
+  useEffect(() => {
+    const getAppointments = async () => {
+      try {
+        const res = await axios.get(`/api/v1/calender/${userr._id}`);
+        setAppointments(res.data);
+        console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getAppointments();
+  }, []);
+
   const onModalSubmit = (data) => {
     const date = data.Date + "-" + (selectedMonth + 1) + "-" + selectedYear;
-    const dataByDate = {
-      date,
-      startTime: data.startTime,
-      endTime: data.endTime,
-      createdBy: user._id,
-      data: data,
-    };
+
     const payload = {
       startTime: data.startTime,
       endTime: data.endTime,
@@ -104,23 +102,17 @@ function Calendar() {
     };
     // N.B that (startTime > endTime)
     axios({
-      url: "/api/save",
+      url: "/api/v1/calender",
       method: "POST",
       data: payload,
     })
       .then(() => {
-        console.log("Data has been sent to the server");
+        setAppointments([...appointments, payload]);
       })
       .catch(() => {
         console.log("Internal server error");
       });
-
-    addAppointment(dataByDate);
   };
-
-  // useEffect = () => {
-  //   getApointments();
-  // };
 
   return (
     <>
@@ -150,6 +142,7 @@ function Calendar() {
                     date={i - startIndex + 1}
                     month={selectedMonth + 1}
                     year={selectedYear}
+                    appointments={appointments}
                   />
                 </CalenderDateDayContainerActive>
               ) : (
@@ -159,7 +152,6 @@ function Calendar() {
               )
             )}
           </CalenderDateContainer>
-          
         </CalendarContainerBody>
       </CalendarContainer>
 

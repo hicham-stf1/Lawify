@@ -7,7 +7,7 @@ import ProfileDefault from "../assets/images/profile-default.png";
 import { useAppContext } from "../context/appContext";
 import EditInfosForm from "../components/EditInfosForm2";
 
-function Banner() {
+function Banner(props) {
   const [infosModalState, setInfosModalState] = useState(false);
   const openInfosModal = () => {
     setInfosModalState(!infosModalState);
@@ -28,7 +28,7 @@ function Banner() {
         </div>
       </div>
 
-      <div class="profile-name">POOP</div>
+      <div class="profile-name">{props.user.name}</div>
 
       <div class="box">
         <div class="about">

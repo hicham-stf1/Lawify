@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
-import { links, social } from "./data";
-import logo from "./logo.svg";
 import "./Navbar.css";
 import { FiLogOut } from "react-icons/fi";
 import { Link } from "react-router-dom";
@@ -10,9 +8,10 @@ import { useAppContext } from "../../context/appContext";
 
 const Navbar = () => {
   const [showLinks, setShowLinks] = useState(false);
+  const { user } = useAppContext();
+  const [userr, setUserr] = useState(user);
   const linksContainerRef = useRef(null);
   const linksRef = useRef(null);
-  const { user } = useAppContext();
   const toggleLinks = () => {
     setShowLinks(!showLinks);
   };
@@ -33,33 +32,57 @@ const Navbar = () => {
     <nav>
       <div className="nav-center">
         <div className="nav-header">
-          <Link to="/">
+          <Link style={{ width: "fit-content", float: "left" }} to="/">
             <Logo />
           </Link>
           <button className="nav-toggle" onClick={toggleLinks}>
             <FaBars />
           </button>
         </div>
-        <div className="links-container" ref={linksContainerRef}>
+        <div
+          style={{ margin: "auto" }}
+          className="links-container"
+          ref={linksContainerRef}
+        >
           <ul className="links" ref={linksRef}>
             <li>
-              <a href="/areyoualawyer">Vous êtes un avocat ?</a>
+              <a style={{ width: "fit-content" }} href="/messenger">
+                Messenger
+              </a>
+            </li>
+
+            {userr && userr.role === "avocat" ? (
+              <li>
+                <a style={{ width: "fit-content" }} href="/calender">
+                  Mon Calendrier
+                </a>
+              </li>
+            ) : (
+              <></>
+            )}
+
+            <li>
+              <a style={{ width: "fit-content" }} href="/projects">
+                Mes Rendez-vous
+              </a>
             </li>
             <li>
-              <a href="/projects">Français</a>
-            </li>
-            <li>
-              <a href={user ? `/profile` : `/moncompte`}>
+              <a
+                style={{ width: "fit-content" }}
+                href={user ? `/profile` : `/moncompte`}
+              >
                 {user ? `Mon Profil` : `Se Connecter`}
               </a>
             </li>
-            { user?
+            {user ? (
               <li>
-                <a href="/" onClick={logoutUser}>
+                <a className="logouticon" href="/" onClick={logoutUser}>
                   <FiLogOut title="LogOut" style={{ fontSize: "1.5em" }} />
                 </a>
-              </li> : <></>
-            }
+              </li>
+            ) : (
+              <></>
+            )}
           </ul>
         </div>
         {/* <ul className="social-icons">

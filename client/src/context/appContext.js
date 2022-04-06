@@ -32,7 +32,6 @@ import {
 
 const token = localStorage.getItem("token");
 const user = localStorage.getItem("user");
-const userLocation = localStorage.getItem("location");
 
 export const initialState = {
   isLoading: false,
@@ -40,7 +39,6 @@ export const initialState = {
   alertText: "",
   user: user ? JSON.parse(user) : null,
   token: token,
-  userLocation: userLocation || "",
   alertType: "",
   city: "choose one",
   speciality: "choose one",
@@ -125,13 +123,11 @@ const AppProvider = ({ children }) => {
   const addUserToLocalStorage = ({ user, token, location }) => {
     localStorage.setItem("user", JSON.stringify(user));
     localStorage.setItem("token", token);
-    // localStorage.setItem("location", location);
   };
 
   const removeUserFromLocalStorage = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    // localStorage.removeItem("location");
   };
 
   const logoutUser = () => {
@@ -268,7 +264,10 @@ const AppProvider = ({ children }) => {
   const updateUser = async (currentUser) => {
     dispatch({ type: UPDATE_USER_BEGIN });
     try {
-      const { data } = await authFetch.patch("/auth/update-profile", currentUser);
+      const { data } = await authFetch.patch(
+        "/auth/update-profile",
+        currentUser
+      );
 
       const { user, location, token } = data;
 

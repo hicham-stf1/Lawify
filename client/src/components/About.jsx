@@ -11,7 +11,7 @@ import EditCompetencesForm from "../components/EditCompetencesForm";
 import EditCoordonneesForm from "../components/EditCoordonneesForm";
 import EditInfosForm from "../components/EditInfosForm";
 
-function About() {
+function About(props) {
   const [presentationModalState, setPresentationModalState] = useState(false);
   const [competencesModalState, setCompetencesModalState] = useState(false);
   const [coordonneesModalState, setCoordonneesModalState] = useState(false);
@@ -28,161 +28,237 @@ function About() {
   const openInfosModal = () => {
     setInfosModalState(!infosModalState);
   };
+
   return (
     <>
       <div>
-        <div id="presentation" class="container1">
-          <br />
-          <div class="section-header">
-            <div class="section-title">Présentation</div>
-            <button
-              onClick={openPresentationModal}
-              type="submit"
-              className="btn btn-block button editButton"
-            >
-              Modifier
-            </button>
+        {props.user.presentation ? (
+          <div id="presentation" class="container1">
+            <br />
+            <div class="section-header">
+              <div class="section-title">Présentation</div>
+              <button
+                onClick={openPresentationModal}
+                type="submit"
+                className="btn btn-block button editButton"
+              >
+                Modifier
+              </button>
+            </div>
+            <p class="desc">{props.user.presentation}</p>
+            <br />
           </div>
-          <p class="desc">
-            l'avocat représente et défend, devant un tribunal, les particuliers
-            ou les entreprises engagés dans un procès. Il suit des affaires
-            civiles (accidents, divorces...) ou pénales (vols, crimes...). Dans
-            le cadre des procédures pénales, il est présent lors des gardes à
-            vue.
-          </p>
-          <br />
-        </div>
+        ) : (
+          <div id="presentation">
+            <div style={{ height: "100px" }} class="container1 section-header">
+              <button
+                onClick={openPresentationModal}
+                type="submit"
+                className="btn btn-block button editButton"
+                style={{
+                  float: "none",
+                  marginTop: "20px",
+                  width: "fit-content",
+                }}
+              >
+                Ajouter une presentation
+              </button>
+            </div>
+          </div>
+        )}
+
         <br />
-        <div id="competences" class="container1">
-          <br />
-          <div class="section-header">
-            <div class="section-title">Compétances</div>
-            <button
-              onClick={openCompetencesModal}
-              type="submit"
-              className="btn btn-block button editButton"
-            >
-              Modifier
-            </button>
-          </div>
-          <div class="competances">
-            <div class="competance">
-              <img style={{ width: "15px" }} src={ListImage} /> Competance 1
-            </div>
-            <div class="competance">
-              <img style={{ width: "15px" }} src={ListImage} /> Competance 2
-            </div>
-            <div class="competance">
-              <img style={{ width: "15px" }} src={ListImage} /> Competance 3
-            </div>
-            <div class="competance">
-              <img style={{ width: "15px" }} src={ListImage} /> Competance 3
-            </div>
-            <div class="competance">
-              <img style={{ width: "15px" }} src={ListImage} /> Competance 3
-            </div>
-            <div class="competance">
-              <img style={{ width: "15px" }} src={ListImage} /> Competance 3
-            </div>
-            <div class="competance">
-              <img style={{ width: "15px" }} src={ListImage} /> Competance 3
-            </div>
-          </div>
-        </div>
         <br />
-        <div id="coordonnees" class="container1">
-          <br />
-          <div class="section-header">
-            <div class="section-title">Coordonnées</div>
-            <button
-              onClick={openCoordonneesModal}
-              type="submit"
-              className="btn btn-block button editButton"
-            >
-              Modifier
-            </button>
-          </div>
-          <div class="coordonnees">
-            <div class="map">
-              <img style={{ width: "200px" }} src={FakeMap}></img>
+
+        {props.user.competences ? (
+          <div id="competences" class="container1">
+            <br />
+            <div class="section-header">
+              <div class="section-title">Compétances</div>
+              <button
+                onClick={openCompetencesModal}
+                type="submit"
+                className="btn btn-block button editButton"
+              >
+                Modifier
+              </button>
             </div>
-            <div class="coordonnee">
-              <p>
-                <ImLocation2 /> 250 rue Saint Jacques - 75005 Paris 5eme
-                Arrondissement
-              </p>
-              <p>
-                <BiWorld />
-                <a href="https://monsite.com"> https://monsite.com</a>
-              </p>
-              <p>
-                <BsTelephoneFill /> +21206060606
-              </p>
-              <p>
-                <MdEmail /> nom.prenom@mymail.com
-              </p>
+            <div class="competances">
+              {props.user.competences.map((i, competence) => (
+                <div key={i} class="competance">
+                  <img style={{ width: "15px" }} src={ListImage} />{" "}
+                  {props.user.competences[competence]}
+                </div>
+              ))}
             </div>
           </div>
-        </div>
+        ) : (
+          <div id="competences">
+            <div style={{ height: "100px" }} class="container1 section-header">
+              <button
+                onClick={openCoordonneesModal}
+                type="submit"
+                className="btn btn-block button editButton"
+                style={{
+                  float: "none",
+                  marginTop: "20px",
+                  width: "fit-content",
+                }}
+              >
+                Ajouter vos competences
+              </button>
+            </div>
+          </div>
+        )}
+
         <br />
-        <div id="infos" class="container1">
-          <br />
-          <div class="section-header">
-            <div class="section-title">Informations Supplimentaires</div>
-            <button
-              onClick={openInfosModal}
-              className="btn btn-block button editButton"
-            >
-              Modifier
-            </button>
+        <br />
+
+        {props.user.adresse == null &&
+        props.user.tele == null &&
+        props.user.website == null ? (
+          <div id="coordonnees" class="container1">
+            <div style={{ height: "100px" }} class="section-header">
+              <button
+                onClick={openCoordonneesModal}
+                type="submit"
+                className="btn btn-block button editButton"
+                style={{
+                  float: "none",
+                  marginTop: "20px",
+                  width: "fit-content",
+                }}
+              >
+                Ajouter vos coordonnees
+              </button>
+            </div>
+            <div class="coordonnees">
+              <div class="map">
+                <img style={{ width: "200px" }} src={FakeMap}></img>
+              </div>
+            </div>
           </div>
-          <ul class="infos">
-            <li>
-              Langues Parlées :{" "}
-              <span style={{ display: "block" }}>
-                العربية • Français • English
-              </span>
-            </li>
-            <li>
-              Diplomes et formations :
-              <span style={{ display: "block" }}>
-                <ul class="info">
-                  <li>Maîtrise de Droit des Affaires (1989)</li>
-                  <li>DEA de Droit de l'Economie (1990)</li>
-                </ul>
-              </span>
-            </li>
-            <li>
-              Tarifs :{" "}
-              <span style={{ display: "block" }}>
-                <ul class="info">
-                  <li>Rendez-vous au cabinet : 150 DH</li>
-                  <li>Rendez-vous en ligne : 100 DH</li>
-                </ul>
-              </span>
-            </li>
-          </ul>
-        </div>
+        ) : (
+          <div id="coordonnees" class="container1">
+            <br />
+            <div class="section-header">
+              <div class="section-title">Coordonnées</div>
+              <button
+                onClick={openCoordonneesModal}
+                type="submit"
+                className="btn btn-block button editButton"
+              >
+                Modifier
+              </button>
+            </div>
+            <div class="coordonnees">
+              <div class="map">
+                <img style={{ width: "200px" }} src={FakeMap}></img>
+              </div>
+              <div class="coordonnee">
+                <p>
+                  <ImLocation2 /> {props.user.adresse}
+                </p>
+                <p>
+                  <BiWorld />
+                  <a href="https://monsite.com"> {props.user.website}</a>
+                </p>
+                <p>
+                  <BsTelephoneFill /> {props.user.tele}
+                </p>
+                <p>
+                  <MdEmail /> {props.user.email}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <br />
+        <br />
+        {props.user.langues == null &&
+        props.user.formations == null &&
+        props.user.tarifs == null ? (
+          <div id="infos">
+            <div style={{ height: "100px" }} class="container1 section-header">
+              <button
+                onClick={openInfosModal}
+                type="submit"
+                className="btn btn-block button editButton"
+                style={{
+                  float: "none",
+                  marginTop: "20px",
+                  width: "fit-content",
+                }}
+              >
+                Ajouter vos Informations
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div id="infos" class="container1">
+            <br />
+            <div class="section-header">
+              <div class="section-title">Informations Supplimentaires</div>
+              <button
+                onClick={openInfosModal}
+                className="btn btn-block button editButton"
+              >
+                Modifier
+              </button>
+            </div>
+            <ul class="infos">
+              <li>
+                Langues Parlées :{" "}
+                <span style={{ display: "block" }}>
+                  العربية • Français • English
+                </span>
+              </li>
+              <li>
+                Diplomes et formations :
+                <span style={{ display: "block" }}>
+                  <ul class="info">
+                    <li>Maîtrise de Droit des Affaires (1989)</li>
+                    <li>DEA de Droit de l'Economie (1990)</li>
+                  </ul>
+                </span>
+              </li>
+              <li>
+                Tarifs :{" "}
+                <span style={{ display: "block" }}>
+                  <ul class="info">
+                    <li>Rendez-vous au cabinet : 150 DH</li>
+                    <li>Rendez-vous en ligne : 100 DH</li>
+                  </ul>
+                </span>
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
       <EditPresentationForm
+        user={props.user}
         modalState={presentationModalState}
         openModal={openPresentationModal}
-        // onModalSubmit={onModalSubmit}
+        // onModalSubmit={onPresentationModalSubmit}
       />
       <EditCompetencesForm
+        user={props.user}
         modalState={competencesModalState}
         openModal={openCompetencesModal}
-        // onModalSubmit={onModalSubmit}
+        // onModalSubmit={onCompetencesModalSubmit}
       />
       <EditCoordonneesForm
+        user={props.user}
         modalState={coordonneesModalState}
         openModal={openCoordonneesModal}
-        // onModalSubmit={onModalSubmit}
+        // onModalSubmit={onCoordonneesModalSubmit}
       />
       <EditInfosForm
+        user={props.user}
         modalState={infosModalState}
         openModal={openInfosModal}
-        // onModalSubmit={onModalSubmit}
+        // onModalSubmit={onInfosModalSubmit}
       />
     </>
   );
