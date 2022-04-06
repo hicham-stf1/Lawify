@@ -6,7 +6,6 @@ import "../../css/profiles.css";
 import styled from "styled-components";
 import SearchCard from "../../components/SearchCard";
 import { Link } from "react-router-dom";
-import AvailabilitySlots from "../AvailabilitySlots";
 import { GiPositionMarker } from "react-icons/gi";
 
 class Profiles extends React.Component {
@@ -17,8 +16,7 @@ class Profiles extends React.Component {
     price: "",
     speciality: "",
     items: [],
-    cit: "",
-    specialit: "",
+
     search: "",
     image: "",
   };

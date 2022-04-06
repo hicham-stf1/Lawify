@@ -30,8 +30,8 @@ const register = async (req, res) => {
   });
 };
 const registerLawyer = async (req, res) => {
-  const { name, email, password, phoneNumber, city } = req.body;
-  if (!name || !email || !password || !phoneNumber || !city) {
+  const { name, email, password, phoneNumber, city, image } = req.body;
+  if (!name || !email || !password || !phoneNumber || !city || !image) {
     throw new badRequestError("Please provide all values");
   }
 
@@ -48,6 +48,7 @@ const registerLawyer = async (req, res) => {
     password,
     phoneNumber,
     city,
+    image,
   });
   const token = user.createJWT();
   res.status(StatusCodes.CREATED).json({
@@ -56,6 +57,7 @@ const registerLawyer = async (req, res) => {
       name: user.name,
       phoneNumber: user.phoneNumber,
       city: user.city,
+      image: user.image,
     },
     token,
   });
@@ -65,7 +67,8 @@ const login = async (req, res) => {
   if (!email || !password) {
     throw new badRequestError("Please provide all values");
   }
-  const user = await User.findOne({ email }).select("+password");
+  const user = await (User.findOne({ email }).select("+password") ||
+    (await Avocat.findOne({ email }).select("+password")));
 
   if (!user) {
     throw new UnAuthenticatedError("Invalid Credentials");
@@ -77,7 +80,7 @@ const login = async (req, res) => {
   }
   const token = user.createJWT();
   user.password = undefined;
-  res.status(StatusCodes.OK).json({ user, token, location: user.location });
+  res.status(StatusCodes.OK).json({ user, token });
 };
 
 const updateUser = async (req, res) => {

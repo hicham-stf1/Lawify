@@ -1,5 +1,7 @@
 import express from "express";
+import bodyParser from "body-parser";
 const app = express();
+import cors from "cors";
 
 import morgan from "morgan";
 
@@ -28,6 +30,10 @@ import authenticateUser from "./middleware/auth.js";
 //   },
 // });
 
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.use(cors());
+
 if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
 }
@@ -50,14 +56,10 @@ app.use("/api/v1/auth", authRouter);
 // app.use("/api/v1/jobs", jobsRouter);
 app.use("/api", routes);
 
-//PRoducts
-
 app.use(notFoundModule);
 app.use(errorHandlerMiddleware);
 
 const port = process.env.PORT || 5000;
-
-// app.listen(port, () => console.log(`Server is listening on port ${port}...`));
 
 const start = async () => {
   try {
