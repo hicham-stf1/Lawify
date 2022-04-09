@@ -1,5 +1,5 @@
 .messenger {
-  height: calc(100vh - 70px);
+  height: calc(100vh - 140px);
   display: flex;
 }
 
@@ -54,9 +54,7 @@
   color: white;
 }
 
-.chatOnline {
-  flex: 3;
-}
+
 
 .chatMenuWrapper,
 .chatBoxWrapper,
