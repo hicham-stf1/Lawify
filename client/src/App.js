@@ -22,11 +22,10 @@ import LawyerRegister from "./pages/LawyerRegister";
 import AvocatHome from "./pages/AvocatHome";
 import UserProfile from "./pages/UserProfile";
 import UpdateAvocat from "./pages/UpdateAvocat";
-import Footer from "./components/compenent-footer/Footer";
 import FetchTime from "./pages/FetchTime";
 import Calendar from "./pages/Calendar.js";
 import AvailabilitySlots from "./pages/AvailabilitySlots";
-// import Requests from "./pages/AdminPanel/Requests";
+import Requests from "./pages/AdminPanel/Requests";
 import RequestDetails from "./pages/AdminPanel/RequestDetails";
 
 function App() {
@@ -34,6 +33,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<WelcomePage />} />
+        <Route path="/requests" element={<Requests />} />
+        <Route path="/requestDetails/:requestId" element={<RequestDetails />} />
         <Route path="/profile" element={<Profil />} />
         <Route path="/update-profile" element={<UserProfile />} />
         <Route path="/appointements" element={<MesRdv />} />

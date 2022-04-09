@@ -31,12 +31,6 @@ import errorHandlerMiddleware from "./middleware/error-handler.js";
 import notFoundModule from "./middleware/not-found.js";
 import authenticateUser from "./middleware/auth.js";
 
-// axios.get("https://fontawesome.com/v4/icons/", {
-//   headers: {
-//     "Access-Control-Allow-Origin": true,
-//   },
-// });
-
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
@@ -47,10 +41,6 @@ if (process.env.NODE_ENV !== "production") {
 
 app.use(express.json());
 console.log("Helloooo");
-
-// app.get("/", (req, res) => {
-//   res.json({ msg: "Welcome!" });
-// });
 
 app.get("/api/v1", (req, res) => {
   res.status(200).json({ msg: "API" });

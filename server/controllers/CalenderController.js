@@ -37,6 +37,30 @@ router.get("/avocats", (req, res) => {
       // console.log("error: ", error);
     });
 });
+router.get("/avoca/:_id", (req, res) => {
+  Avocat.find({ _id: req.params._id })
+    .then((data) => {
+      console.log("Data: ", data);
+      res.json(data);
+    })
+    .catch((error) => {
+      console.log("error: ", error);
+    });
+});
+
+router.patch("/avoca/:id", (req, res) => {
+  Avocat.findOneAndUpdate(
+    { _id: req.params.id },
+    { $set: { Status: "Confirmed" } },
+    { new: true },
+    function (err, doc) {
+      if (err) {
+        console.log("Something wrong when updating data!");
+      }
+      console.log(doc);
+    }
+  );
+});
 
 router.post("/calender/save", (req, res) => {
   const data = req.body;

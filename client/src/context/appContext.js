@@ -91,7 +91,7 @@ export const initialState = {
     "Tiznit",
     "Touissite",
   ],
-  specialityOptions: ["Droit de Sport ", "Droit de Famille"],
+  specialityOptions: ["Sport", "Famille"],
   endTime: "",
   startTime: "",
   jobs: [],

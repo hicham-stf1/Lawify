@@ -16,7 +16,6 @@ class Profiles extends React.Component {
     price: "",
     speciality: "",
     items: [],
-
     search: "",
     image: "",
   };

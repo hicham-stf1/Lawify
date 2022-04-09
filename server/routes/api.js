@@ -4,6 +4,7 @@ const router = express.Router();
 import TheTime from "../model/Time.js";
 import City from "../model/City.js";
 import Speciality from "../model/Speciality.js";
+import Avocat from "../model/Avocat.js";
 
 // Routes
 router.get("/", (req, res) => {
@@ -48,36 +49,9 @@ router.post("/save", (req, res) => {
   });
 });
 
-router.get("/name", (req, res) => {
-  const data = {
-    username: "peterson",
-    age: 5,
-  };
-  res.json(data);
-});
-
 router.delete("/:id", async (req, res) => {
   await TheTime.findByIdAndDelete(req.params.id);
 });
-
-// export async function deleteAProduct(req, res, next) {
-//   const id = req.params.id;
-//   try {
-//     const result = await Time.findByIdAndDelete(id);
-//     // console.log(result);
-//     if (!result) {
-//       throw createError(404, "Product does not exist.");
-//     }
-//     res.send(result);
-//   } catch (error) {
-//     console.log(error.message);
-//     if (error instanceof mongoose.CastError) {
-//       next(createError(400, "Invalid Product id"));
-//       return;
-//     }
-//     next(error);
-//   }
-// }
 
 router.get("/v1/cities", async (req, res) => {
   try {
