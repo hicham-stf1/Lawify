@@ -7,6 +7,7 @@ import styled from "styled-components";
 import SearchCard from "../../components/SearchCard";
 import { Link } from "react-router-dom";
 import { GiPositionMarker } from "react-icons/gi";
+import Calendar from "../../components/Calendar";
 
 class Profiles extends React.Component {
   state = {
@@ -16,9 +17,26 @@ class Profiles extends React.Component {
     price: "",
     speciality: "",
     items: [],
-
     search: "",
     image: "",
+    calendarState: false,
+    selectedAvocat: "",
+  };
+
+  handleSelectedAvocat = () => {};
+
+  setSelectedAvocat = (id) => {
+    this.setState({ ...this.state, selectedAvocat: id }, function () {
+      this.setState({
+        ...this.state,
+        calendarState: !this.state.calendarState,
+      });
+      console.log(`test ${this.state.selectedAvocat}`);
+    });
+  };
+
+  openCalendar = () => {
+    this.setState({ ...this.state, calendarState: !this.state.calendarState });
   };
 
   componentDidMount = () => {
@@ -69,33 +87,47 @@ class Profiles extends React.Component {
         }
       })
       .map((menuItem) => {
-        const { id, name, email, city, price, speciality, image } = menuItem;
+        const { _id, name, email, city, price, speciality, image } = menuItem;
+        const link = `/profile/${_id}`;
         return (
-          <article key={id} className="menu-item">
-            <img
-              style={{
-                width: "130px",
-                height: "130px",
-                borderRadius: "50%",
-                objectFit: "cover",
-                marginBottom: " 0.75rem",
-              }}
-              src={image}
-              alt={name}
-              // className="photo"
-            />
-            <div className="item-info">
-              <header>
-                <h5>{name}</h5>
-                <h5 className="price">{price} $/min</h5>
-              </header>
-              <p className="item-text">{speciality}</p>
-              <p className="item-text" style={{ color: "#2cb1bc" }}>
-                <GiPositionMarker /> {city}
-              </p>
-              <Link to="/availibilityslots" style={{ textDecoration: "none" }}>
-                <p
+          <div key={_id}>
+            <article className="menu-item">
+              <Link to={link}>
+                <img
+                  style={{
+                    width: "130px",
+                    height: "130px",
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                    marginBottom: " 0.75rem",
+                  }}
+                  src={image}
+                  alt={name}
+                />
+              </Link>
+
+              <div className="item-info">
+                <header>
+                  <Link
+                    style={{
+                      textDecoration: "none",
+                      color: ": var(--primary-500)",
+                    }}
+                    to="/profile"
+                  >
+                    <h5>{name}</h5>
+                  </Link>
+                  <h5 className="price">{price} $/min</h5>
+                </header>
+                <p className="item-text">{speciality}</p>
+                <p className="item-text" style={{ color: "#2cb1bc" }}>
+                  <GiPositionMarker /> {city}
+                </p>
+                <button
                   className="item-text"
+                  onClick={() => {
+                    this.setSelectedAvocat(_id);
+                  }}
                   style={{
                     color: "black",
                     backgroundColor: "#bef8fd",
@@ -103,13 +135,14 @@ class Profiles extends React.Component {
                     borderRadius: "12px",
                     marginTop: "14px",
                     font: "caption",
+                    cursor: "pointer",
                   }}
                 >
                   Voir le créneaux de disponibilité
-                </p>
-              </Link>
-            </div>
-          </article>
+                </button>
+              </div>
+            </article>
+          </div>
         );
       });
   };
@@ -139,6 +172,15 @@ class Profiles extends React.Component {
           <div className="section-center">
             {this.displayBlogPost(this.state.items)}
           </div>
+
+          <Calendar
+            key={this.state.selectedAvocat}
+            id="calendar"
+            selectedAvocat={this.state.selectedAvocat}
+            calendarState={this.state.calendarState}
+            openCalendar={this.openCalendar}
+            // onModalSubmit={onInfosModalSubmit}
+          />
         </section>
       </main>
     );

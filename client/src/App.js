@@ -17,6 +17,7 @@ import ConfirmerRdv from "./pages/ConfirmerRdv";
 import MesRdv from "./pages/MesRdv";
 import MesRdvPass from "./pages/MesRdvPass";
 import Profil from "./pages/Profil";
+import MyProfile from "./pages/MyProfile";
 
 import LawyerRegister from "./pages/LawyerRegister";
 import AvocatHome from "./pages/AvocatHome";
@@ -34,10 +35,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<WelcomePage />} />
-        <Route path="/profile" element={<Profil />} />
+        <Route path="/profile/:visitedUser" element={<Profil />} />
+        <Route path="/profile" element={<MyProfile />} />
         <Route path="/update-profile" element={<UserProfile />} />
         <Route path="/appointements" element={<MesRdv />} />
-        <Route path="/book-appointment" element={<FormRdv />} />
+        <Route path="/book-appointment/:selectedAvocat/:date/:startTime/:endTime" element={<FormRdv />} />
         <Route path="/passed-appointements" element={<MesRdvPass />} />
         <Route path="/appointment-confirmation" element={<ConfirmerRdv />} />
         <Route path="/update-avocat" element={<UpdateAvocat />} />
@@ -49,6 +51,10 @@ function App() {
         <Route path="/registeruser" element={<UserRegister />} />
         <Route path="/registeravocat" element={<LawyerRegister />} />
         <Route path="/searchresult" element={<SearchResult />} />
+        <Route
+          path="/messenger/:currentUser/:currentFriend"
+          element={<Messenger />}
+        />
         <Route path="/messenger" element={<Messenger />} />
         <Route path="/fetchtime" element={<FetchTime />} />
         <Route path="/year/:year/month/:month" element={<Calendar />} />

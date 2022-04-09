@@ -7,21 +7,21 @@ import { useParams } from "react-router-dom";
 import "../css/Main.css";
 import { useAppContext } from "../context/appContext";
 
-function Profil() {
+function MyProfile() {
   const { user } = useAppContext();
   const [userr, setUserr] = useState(user);
-  const visitedUser = useParams().visitedUser;
 
   return (
     <div>
       <Navbar />
       <br />
-      <Banner user={visitedUser} />
+      <Banner user={userr._id} />
       <br />
-      <About user={visitedUser} />
+      {userr.role === "user" ? null : <About user={userr._id} />}
+
       <br />
     </div>
   );
 }
 
-export default Profil;
+export default MyProfile;

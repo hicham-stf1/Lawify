@@ -17,7 +17,7 @@ import {
 } from "../assets/styledComponent/index";
 
 function EditPresentationForm(props) {
-  const [presentation, setPresentation] = useState(props.user.presentation);
+  const [presentation, setPresentation] = useState(props.user?.presentation);
   const { showAlert, displayAlert, updateUser, isLoading } = useAppContext();
 
   const handleSubmit = (e) => {

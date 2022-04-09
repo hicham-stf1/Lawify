@@ -20,8 +20,7 @@ const theData = localStorage.getItem("appointMentData");
 
 function EditCompetencesForm(props) {
   const { register, handleSubmit } = useForm();
-  const [competences, setCompetences] = useState([])
-
+  const [competences, setCompetences] = useState([]);
 
   const addCompetence = (e) => {
     if (e.key === "Shift") {
@@ -32,17 +31,17 @@ function EditCompetencesForm(props) {
     }
   };
   const removeCompetence = (removedCompetence) => {
-    const newCompetences = competences.filter((competence) => competence !== removedCompetence);
+    const newCompetences = competences.filter(
+      (competence) => competence !== removedCompetence
+    );
     setCompetences(newCompetences);
   };
 
-
   const onSubmit = (e) => {
-      e.preventDefault();
-      console.log(competences)
-      props.onModalSubmit(competences);
-      props.openModal();
-    
+    e.preventDefault();
+    console.log(competences);
+    props.onModalSubmit(competences);
+    props.openModal();
   };
 
   return (
@@ -56,26 +55,31 @@ function EditCompetencesForm(props) {
       <ModalHeader>Modifier vos competences</ModalHeader>
       <form onSubmit={onSubmit}>
         <ModalBody>
+          <TagInput className="App">
+            <div className="tag-container">
+              {competences.map((competence, index) => {
+                return (
+                  <div key={index} className="tag">
+                    {competence}{" "}
+                    <span onClick={() => removeCompetence(competence)}>
+                      <i className="fas fa-times-circle"></i>
+                    </span>
+                  </div>
+                );
+              })}
 
-        <TagInput className="App">
-
-      <div className="tag-container">
-        {competences.map((competence, index) => {
-          return (
-            <div key={index} className="tag">
-              {competence} <span onClick={() => removeCompetence(competence)}><i className="fas fa-times-circle"></i></span>
+              <input
+                placeholder="Enter text and click shift to add"
+                onKeyDown={addCompetence}
+              />
             </div>
-          );
-        })}
-
-        <input placeholder="Enter text and click shift to add" onKeyDown={addCompetence} />
-      </div>
-    </TagInput>
-
+          </TagInput>
         </ModalBody>
         <ModalFooter>
           <ModalSubmit className="presentation">Submit</ModalSubmit>
-          <ModalCancel className="presentation" onClick={props.openModal}>Cancel</ModalCancel>
+          <ModalCancel className="presentation" onClick={props.openModal}>
+            Cancel
+          </ModalCancel>
         </ModalFooter>
       </form>
     </Modal>

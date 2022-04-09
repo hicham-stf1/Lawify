@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import _ from "lodash";
+import { Link } from "react-router-dom";
 import Appointment from "../components/appointmentComponent";
 import {
   DateDataContainer,
@@ -9,8 +10,7 @@ import {
 import { useState } from "react";
 
 function DateComponent(props) {
-
-
+  const link = `/book-appointment/`;
   return (
     <>
       <DateDataContainer>
@@ -19,10 +19,14 @@ function DateComponent(props) {
           {props.appointments.map((appointment) =>
             appointment.date ===
             props.date + "-" + props.month + "-" + props.year ? (
-              <Appointment
-                startTime={appointment.startTime}
-                endTime={appointment.endTime}
-              ></Appointment>
+              <button style={{ margin: "0px", cursor: "pointer" }}>
+                <Appointment
+                  startTime={appointment.startTime}
+                  endTime={appointment.endTime}
+                  selectedAvocat={props.selectedAvocat}
+                  date={appointment.date}
+                ></Appointment>
+              </button>
             ) : null
           )}
         </DateApointmentContainer>
@@ -30,6 +34,5 @@ function DateComponent(props) {
     </>
   );
 }
-
 
 export default DateComponent;

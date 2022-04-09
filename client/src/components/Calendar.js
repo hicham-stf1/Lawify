@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
+import Modal from "react-modal";
+import { useState, useEffect } from "react";
 import moment from "moment";
-
-import NavBar from "../components/NavBar/Navbar.js";
+import axios from "axios";
 import CalenderHeader from "../components/calenderHeader";
 import DateComponent from "../components/dateContainer";
-import FormModal from "../components/FormModal";
-import axios from "axios";
 import {
   CalenderDateDayContainerActive,
   CalenderDateDayContainerDisable,
@@ -18,9 +16,14 @@ import {
 import { weekArray, gridArray } from "../constant/index";
 import { useParams } from "react-router-dom";
 
-const user = JSON.parse(localStorage.getItem("user"));
+import {
+  ModalCancel,
+  ModalFooter,
+  calendarStyles,
+} from "../assets/styledComponent/index";
 
-function Calendar() {
+const user = JSON.parse(localStorage.getItem("user"));
+function Calendar(props) {
   const { year, month } = useParams();
 
   const [selectedYear, setSelectedYear] = useState(2022);
@@ -59,14 +62,11 @@ function Calendar() {
     setSelectedMonth(parseInt(value - 1));
   };
 
-  const openModal = () => {
-    setModalState(!modalState);
-  };
-
   useEffect(() => {
+    console.log(`id: ${props.selectedAvocat}`);
     const getAppointments = async () => {
       try {
-        const res = await axios.get(`/api/v1/calender/${userr._id}`);
+        const res = await axios.get(`/api/v1/calender/${props.selectedAvocat}`);
         setAppointments(res.data);
         console.log(res);
       } catch (err) {
@@ -76,39 +76,20 @@ function Calendar() {
     getAppointments();
   }, []);
 
-  const onModalSubmit = (data) => {
-    const date = data.Date + "-" + (selectedMonth + 1) + "-" + selectedYear;
-
-    const payload = {
-      startTime: data.startTime,
-      endTime: data.endTime,
-      date: date,
-      createdBy: user._id,
-    };
-    // N.B that (startTime > endTime)
-    axios({
-      url: "/api/v1/calender",
-      method: "POST",
-      data: payload,
-    })
-      .then(() => {
-        setAppointments([...appointments, payload]);
-      })
-      .catch(() => {
-        console.log("Internal server error");
-      });
-  };
-
   return (
-    <>
-      <NavBar />
+    <Modal
+      isOpen={props.calendarState}
+      ariaHideApp={false}
+      onRequestClose={props.openCalendar}
+      style={calendarStyles}
+      contentLabel="Example Modal"
+    >
       <CalendarContainer>
         <CalenderHeader
           onYearSelect={onYearSelect}
           onMonthSelect={onMonthSelect}
           defaultYear={selectedYear.toString()}
           defaultMonth={(selectedMonth + 1).toString()}
-          openModal={openModal}
         />
         <CalendarContainerBody>
           <CalenderWeekContainer>
@@ -128,6 +109,8 @@ function Calendar() {
                     month={selectedMonth + 1}
                     year={selectedYear}
                     appointments={appointments}
+                    onClick="true"
+                    selectedAvocat={props.selectedAvocat}
                   />
                 </CalenderDateDayContainerActive>
               ) : (
@@ -139,14 +122,12 @@ function Calendar() {
           </CalenderDateContainer>
         </CalendarContainerBody>
       </CalendarContainer>
-
-      <FormModal
-        modalState={modalState}
-        openModal={openModal}
-        onModalSubmit={onModalSubmit}
-        dateRange={endIndex}
-      />
-    </>
+      <ModalFooter>
+        <ModalCancel className="presentation" onClick={props.openCalendar}>
+          Cancel
+        </ModalCancel>
+      </ModalFooter>
+    </Modal>
   );
 }
 

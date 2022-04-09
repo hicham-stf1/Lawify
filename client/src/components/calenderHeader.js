@@ -36,9 +36,11 @@ function CalenderHeader(props) {
           value={props.defaultMonth}
         />
       </DropdownContainer>
-      <AppointmentButton onClick={openModal}>
-        Create Appointment
-      </AppointmentButton>
+      {props.openModal ? (
+        <AppointmentButton onClick={openModal}>
+          Create Appointment
+        </AppointmentButton>
+      ) : null}
       {/* {console.log(props.onMonthSelect())} */}
     </CalenderHeaderContainer>
   );

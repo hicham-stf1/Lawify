@@ -1,9 +1,13 @@
-import React, { Component, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 import Navbar from "../components/Navbar1";
 import ListImage from "../assets/images/img_525475.png";
 import { MdVerified, MdWork } from "react-icons/md";
 import { Link } from "react-router-dom";
-import ProfileDefault from "../assets/images/profile-default.png";
+import { ImLocation2 } from "react-icons/im";
+import { MdEmail } from "react-icons/md";
+import axios from "axios";
+import avocatDefaultImg from "../assets/images/avocat-default-img.png";
+import userDefaultImg from "../assets/images/user-default-img.png";
 import { useAppContext } from "../context/appContext";
 import EditInfosForm from "../components/EditInfosForm2";
 
@@ -12,55 +16,109 @@ function Banner(props) {
   const openInfosModal = () => {
     setInfosModalState(!infosModalState);
   };
+  const { user } = useAppContext();
+  const [userr, setUserr] = useState(user);
+  const [userData, setUserData] = useState(null);
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        console.log("test");
+        const res = await axios("/api/users?userId=" + props.user);
+        setUserData(res.data);
+        console.log(res.data);
+        console.log(` user : ${userData}`);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUserData();
+  }, [props.user]);
+  const link = `/messenger/${userr._id}/${props.user}`;
   return (
     <div class="container1">
       <div class="cover-photo">
-        <img src={ProfileDefault} class="profile" />
-        <div class="verified">
-          <MdVerified />
-          <p style={{ display: "inline" }}>
-            &nbsp;Cet avocat nous a fait parvenir sa carte professionnelle
-          </p>
-        </div>
-        <div class="experience">
-          <MdWork />
-          <p style={{ display: "inline" }}>&nbsp;20 annees d'experience</p>
-        </div>
+        <img
+          src={
+            userData?.image || userData?.role === "avocat"
+              ? avocatDefaultImg
+              : userDefaultImg
+          }
+          class="profile"
+        />
+        {userData?.role === "avocat" ? (
+          <>
+            <div class="verified">
+              <MdVerified />
+              <p style={{ display: "inline" }}>
+                &nbsp;Cet avocat nous a fait parvenir sa carte professionnelle
+              </p>
+            </div>
+            <div class="experience">
+              <MdWork />
+              <p style={{ display: "inline" }}>&nbsp;20 annees d'experience</p>
+            </div>
+          </>
+        ) : null}
       </div>
 
-      <div class="profile-name">{props.user.name}</div>
+      <div class="profile-name">{userData?.name}</div>
 
       <div class="box">
         <div class="about">
-          <p class="adresse">250 rue Saint Jacques-Paris</p>
-          <ul class="domaines">
-            <li>Domaine 1</li>
-            <li>Domaine 2</li>
-            <li>Domaine 3</li>
-          </ul>
-          <ul class="services">
-            <li>
-              <img style={{ width: "15px" }} src={ListImage} /> Rendez-vous
-              online
-            </li>
-            <li>
-              <img style={{ width: "15px" }} src={ListImage} /> Rendez-vous au
-              cabinet
-            </li>
-          </ul>
+          <p class="adresse">
+            <ImLocation2 /> 250 rue Saint Jacques-Paris
+          </p>
+          <p class="email">
+            <MdEmail />
+            &nbsp;
+            {userData?.email}
+          </p>
+          {userData?.role === "avocat" ? (
+            <>
+              <ul class="domaines">
+                <li>Domaine 1</li>
+                <li>Domaine 2</li>
+                <li>Domaine 3</li>
+              </ul>
+              <ul class="services">
+                <li>
+                  <img style={{ width: "15px" }} src={ListImage} /> Rendez-vous
+                  online
+                </li>
+                <li>
+                  <img style={{ width: "15px" }} src={ListImage} /> Rendez-vous
+                  au cabinet
+                </li>
+              </ul>
+            </>
+          ) : null}
         </div>
         <div class="actions">
-          <button onClick={openInfosModal} className="btn btn-block button">
-            Modifier Mes Informations
-          </button>
-          <Link to="/fetchtime">
-            <button type="submit" className="btn btn-block button">
-              Mon Calendrier
+          {userr._id === props.user ? (
+            <button onClick={openInfosModal} className="btn btn-block button">
+              Modifier Mes Informations
             </button>
-          </Link>
+          ) : null}
+
+          {userData?.role === "avocat" && props.user !== userr._id ? (
+            <>
+              <Link to="/fetchtime">
+                <button type="submit" className="btn btn-block button">
+                  {userr._id === props.user
+                    ? "Mon Calendrier"
+                    : "Voir Calendrier"}
+                </button>
+              </Link>
+              <a href={link}>
+                <button type="submit" className="btn btn-block button">
+                  Envoyer un message
+                </button>
+              </a>
+            </>
+          ) : null}
         </div>
       </div>
-      <Navbar />
+      {userData?.role === "avocat" ? <Navbar /> : null}
       <EditInfosForm
         modalState={infosModalState}
         openModal={openInfosModal}

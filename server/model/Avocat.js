@@ -4,6 +4,10 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 const AvocatShema = new mongoose.Schema({
+  role: {
+    type: String,
+    default: "avocat",
+  },
   name: {
     type: String,
     required: [true, "Please provide name"],
