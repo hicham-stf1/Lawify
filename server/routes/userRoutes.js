@@ -9,12 +9,18 @@ router.get("/", async (req, res) => {
   try {
     const user = userId
       ? (await User.findById(userId)) || (await Avocat.findById(userId))
-      : (await User.findOne({ username: username }) || await Avocat.findOne({ username: username }));
+      : (await User.findOne({ username: username })) ||
+        (await Avocat.findOne({ username: username }));
     const { password, updatedAt, ...other } = user._doc;
     res.status(200).json(other);
   } catch (err) {
     res.status(500).json(err);
   }
+});
+
+router.delete("/:_id", async (req, res) => {
+  //Request Model
+  await Avocat.findByIdAndDelete(req.params._id);
 });
 
 export default router;

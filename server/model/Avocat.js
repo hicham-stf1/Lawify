@@ -132,6 +132,8 @@ const AvocatShema = new mongoose.Schema({
   Tarifs: {
     type: Array,
   },
+  Status: { type: String, default: "NotConfirmed" },
+  //Upload Certificat
 });
 
 AvocatShema.pre("save", async function () {

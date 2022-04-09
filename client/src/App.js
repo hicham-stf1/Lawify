@@ -23,11 +23,10 @@ import LawyerRegister from "./pages/LawyerRegister";
 import AvocatHome from "./pages/AvocatHome";
 import UserProfile from "./pages/UserProfile";
 import UpdateAvocat from "./pages/UpdateAvocat";
-import Footer from "./components/compenent-footer/Footer";
 import FetchTime from "./pages/FetchTime";
 import Calendar from "./pages/Calendar.js";
 import AvailabilitySlots from "./pages/AvailabilitySlots";
-// import Requests from "./pages/AdminPanel/Requests";
+import Requests from "./pages/AdminPanel/Requests";
 import RequestDetails from "./pages/AdminPanel/RequestDetails";
 
 function App() {
@@ -37,9 +36,14 @@ function App() {
         <Route path="/" element={<WelcomePage />} />
         <Route path="/profile/:visitedUser" element={<Profil />} />
         <Route path="/profile" element={<MyProfile />} />
+        <Route path="/requests" element={<Requests />} />
+        <Route path="/requestDetails/:requestId" element={<RequestDetails />} />
         <Route path="/update-profile" element={<UserProfile />} />
         <Route path="/appointements" element={<MesRdv />} />
-        <Route path="/book-appointment/:selectedAvocat/:date/:startTime/:endTime" element={<FormRdv />} />
+        <Route
+          path="/book-appointment/:selectedAvocat/:date/:startTime/:endTime"
+          element={<FormRdv />}
+        />
         <Route path="/passed-appointements" element={<MesRdvPass />} />
         <Route path="/appointment-confirmation" element={<ConfirmerRdv />} />
         <Route path="/update-avocat" element={<UpdateAvocat />} />

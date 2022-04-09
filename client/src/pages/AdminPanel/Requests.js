@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useFetch } from "./useFetch";
 import Request from "./Request";
-import "./requests.css";
+// import "./requests.css";
+import RequestWrapper from "../../assets/wrappers/Requestes.js";
+
 function Requests() {
   const { loading, data } = useFetch();
   const [page, setPage] = useState(0);
@@ -36,16 +38,25 @@ function Requests() {
   };
 
   return (
-    <main>
+    <RequestWrapper>
       <div className="section-title">
         <h1>{loading ? "loading..." : "Requests"}</h1>
         <div className="underline"></div>
       </div>
       <section className="followers">
         <div className="container">
-          {followers.map((follower) => {
-            return <Request key={follower._id} {...follower} />;
-          })}
+          {followers
+            .filter((notConfirmedRequests) => {
+              const { Status } = notConfirmedRequests;
+              if (Status.includes("NotConfirmed")) {
+                return notConfirmedRequests;
+              }
+            })
+            .map((follower) => {
+              console.log(follower);
+              const link = `/requestDetails/${follower._id}`;
+              return <Request link={link} key={follower._id} {...follower} />;
+            })}
         </div>
         {!loading && (
           <div className="btn-container">
@@ -69,7 +80,7 @@ function Requests() {
           </div>
         )}
       </section>
-    </main>
+    </RequestWrapper>
   );
 }
 
