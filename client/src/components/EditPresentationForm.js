@@ -19,14 +19,14 @@ import {
 function EditPresentationForm(props) {
   const [presentation, setPresentation] = useState(props.user?.presentation);
   const { showAlert, displayAlert, updateUser, isLoading } = useAppContext();
+  const user = JSON.parse(localStorage.getItem("user"));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!presentation) {
-      displayAlert();
-      return;
-    }
-    updateUser({ presentation });
+    await axios.patch(
+      "/api/user/"+ user._id,
+      {presentation}
+    ).then(window.location.reload(false))
   };
 
   return (

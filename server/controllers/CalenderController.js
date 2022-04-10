@@ -108,6 +108,21 @@ router.patch("/calendar/:id/:userId", (req, res) => {
   );
 });
 
+router.patch("/user/:userId", (req, res) => {
+  const {langues, formations, price, email, tele, website, competences, presentation, domaines, adresse} = req.body;
+  Avocat.findOneAndUpdate(
+    { _id: req.params.userId },
+    { $set: {langues, formations, price, email, tele, website, competences, presentation, domaines, adresse } },
+    { new: true },
+    function (err, doc) {
+      if (err) {
+        console.log("Something wrong when updating data!");
+      }
+      console.log(doc);
+    }
+  );
+});
+
 router.post("/calender/save", (req, res) => {
   const data = req.body;
 

@@ -4,7 +4,6 @@ import Wrapper from "../assets/wrappers/RegisterPage";
 import { useAppContext } from "../context/appContext";
 import { useNavigate } from "react-router-dom";
 import UserNavbar from "../components/NavBar/Navbar";
-import Footer from "../components/compenent-footer/Footer";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 

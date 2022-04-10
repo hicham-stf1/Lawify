@@ -66,7 +66,8 @@ function Banner(props) {
       <div class="box">
         <div class="about">
           <p class="adresse">
-            <ImLocation2 /> 250 rue Saint Jacques-Paris
+            {userData?.adresse !== "" || userData?.role==="avocat" ? <ImLocation2 /> : null}{" "}
+            {userData?.adresse}
           </p>
           <p class="email">
             <MdEmail />
@@ -76,9 +77,9 @@ function Banner(props) {
           {userData?.role === "avocat" ? (
             <>
               <ul class="domaines">
-                <li>Domaine 1</li>
-                <li>Domaine 2</li>
-                <li>Domaine 3</li>
+                {userData?.domaines?.map((i, domaine) => (
+                  <li key={i}>{userData?.domaines[domaine]}</li>
+                ))}
               </ul>
               <ul class="services">
                 <li>
@@ -120,8 +121,10 @@ function Banner(props) {
       </div>
       {userData?.role === "avocat" ? <Navbar /> : null}
       <EditInfosForm
+        key={userData}
         modalState={infosModalState}
         openModal={openInfosModal}
+        userData={userData}
         // onModalSubmit={onModalSubmit}
       />
     </div>

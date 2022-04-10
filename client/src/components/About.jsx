@@ -115,7 +115,7 @@ function About(props) {
           <div id="competences">
             <div style={{ height: "100px" }} class="container1 section-header">
               <button
-                onClick={openCoordonneesModal}
+                onClick={openCompetencesModal}
                 type="submit"
                 className="btn btn-block button editButton"
                 style={{
@@ -178,17 +178,20 @@ function About(props) {
               </div>
               <div class="coordonnee">
                 <p>
-                  <ImLocation2 /> {userData?.adresse}
+                  {userData?.adresse !== "" ? <ImLocation2 /> : null}{" "}
+                  {userData?.adresse}
                 </p>
                 <p>
-                  <BiWorld />
-                  <a href="https://monsite.com"> {userData?.website}</a>
+                  {userData?.website !== "" ? <BiWorld /> : null}
+                  <a href={userData?.website}> {userData?.website}</a>
                 </p>
                 <p>
-                  <BsTelephoneFill /> {userData?.tele}
+                  {userData?.tele !== "" ? <BsTelephoneFill /> : null}{" "}
+                  {userData?.tele}
                 </p>
                 <p>
-                  <MdEmail /> {userData?.email}
+                  {userData?.email !== "" ? <MdEmail /> : null}
+                  {userData?.email}
                 </p>
               </div>
             </div>
@@ -234,41 +237,42 @@ function About(props) {
               </button>
             </div>
             <ul class="infos">
-              <li>
-                Langues Parlées :{" "}
+            <li>
+                Langues :
                 <span style={{ display: "block" }}>
-                  العربية • Français • English
+                  <ul class="info">
+                  {userData?.langues?.map((i, langue) => (
+                  <li key={i}>{userData?.langues[langue]}</li>
+                ))}
+                  </ul>
                 </span>
               </li>
               <li>
                 Diplomes et formations :
                 <span style={{ display: "block" }}>
                   <ul class="info">
-                    <li>Maîtrise de Droit des Affaires (1989)</li>
-                    <li>DEA de Droit de l'Economie (1990)</li>
+                  {userData?.formations?.map((i, formation) => (
+                  <li key={i}>{userData?.formations[formation]}</li>
+                ))}
                   </ul>
                 </span>
               </li>
               <li>
-                Tarifs :{" "}
-                <span style={{ display: "block" }}>
-                  <ul class="info">
-                    <li>Rendez-vous au cabinet : 150 DH</li>
-                    <li>Rendez-vous en ligne : 100 DH</li>
-                  </ul>
-                </span>
+                Tarifs:{" " +userData?.price+" DH"}
               </li>
             </ul>
           </div>
         )}
       </div>
       <EditPresentationForm
+        key={userData}
         user={userData}
         modalState={presentationModalState}
         openModal={openPresentationModal}
         // onModalSubmit={onPresentationModalSubmit}
       />
       <EditCompetencesForm
+        key={userData}
         user={userData}
         modalState={competencesModalState}
         openModal={openCompetencesModal}
@@ -276,12 +280,14 @@ function About(props) {
       />
       <EditCoordonneesForm
         user={userData}
+        key={userData}
         modalState={coordonneesModalState}
         openModal={openCoordonneesModal}
         // onModalSubmit={onCoordonneesModalSubmit}
       />
       <EditInfosForm
         user={userData}
+        key={userData}
         modalState={infosModalState}
         openModal={openInfosModal}
         // onModalSubmit={onInfosModalSubmit}

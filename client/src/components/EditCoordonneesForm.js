@@ -22,7 +22,11 @@ const initialState = {
   isMember: true,
 };
 function EditCoordonneesForm(props) {
-  const { register, handleSubmit } = useForm();
+  const user = JSON.parse(localStorage.getItem("user"));
+  const [adresse, setAdresse] = useState(props.user?.adresse);
+  const [website, setWebsite] = useState(props.user?.website);
+  const [email, setEmail] = useState(props.user?.email);
+  const [tele, setTele] = useState(props.user?.tele);
 
   const state = {
     startTime: "",
@@ -36,10 +40,12 @@ function EditCoordonneesForm(props) {
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
-  const onSubmit = (data) => {
-    console.log(data);
-    props.onModalSubmit(data);
-    props.openModal();
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    await axios.patch(
+      "/api/user/"+ user._id,
+      {adresse, email, website, tele}
+    ).then(window.location.reload(false))
   };
 
   return (
@@ -51,7 +57,7 @@ function EditCoordonneesForm(props) {
       contentLabel="Example Modal"
     >
       <ModalHeader>Modifier vos coordonnees</ModalHeader>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={onSubmit}>
         <ModalBody>
           <label
             style={{ whiteSpace: "nowrap", float: "left", marginLeft: "-1px" }}
@@ -62,8 +68,9 @@ function EditCoordonneesForm(props) {
           </label>
           <div className="form-row">
             <input
+              value={adresse}
               name="adresse"
-              {...register("adresse")}
+              onChange={(e) => setAdresse(e.target.value)}
               className="form-input"
             />
           </div>
@@ -77,8 +84,9 @@ function EditCoordonneesForm(props) {
           </label>
           <div className="form-row">
             <input
+              value={website}
               name="site-web"
-              {...register("site-web")}
+              onChange={(e) => setWebsite(e.target.value)}
               className="form-input"
             />
           </div>
@@ -91,7 +99,7 @@ function EditCoordonneesForm(props) {
             Numero de telephone
           </label>
           <div className="form-row">
-            <input name="tele" {...register("tele")} className="form-input" />
+            <input name="tele" value={tele} onChange={(e) => setTele(e.target.value)} className="form-input" />
           </div>
 
           <label
@@ -102,7 +110,7 @@ function EditCoordonneesForm(props) {
             E-mail
           </label>
           <div className="form-row">
-            <input name="email" {...register("email")} className="form-input" />
+            <input name="email" value={email} onChange={(e) => setEmail(e.target.value)} className="form-input" />
           </div>
         </ModalBody>
         <ModalFooter>
