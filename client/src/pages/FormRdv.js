@@ -44,7 +44,7 @@ function FormRdv() {
       "/api/calendar/" + appointmentId + "/" + user._id,
       values
     );
-    navigate("/");
+    window.location.href = "/appointments";
   };
 
   useEffect(() => {
@@ -114,7 +114,11 @@ function FormRdv() {
               handleChange={handleChange}
             />
           </div>
-          <button type="submit" className="btn btn-block">
+          <button
+            type="submit"
+            onClick={() => (window.location.href = "/appointements")}
+            className="btn btn-block"
+          >
             Confirmer
           </button>
         </form>

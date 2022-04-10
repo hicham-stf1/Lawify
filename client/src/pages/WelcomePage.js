@@ -3,7 +3,7 @@ import SearchCard from "../components/SearchCard";
 import TextHeader from "../components/TextHeader";
 import Navbar from "../components/NavBar/Navbar";
 import "scheduler-calendar/dist/index.css";
-import Appel from "../components/compenent-footer/appel";
+import Footer from "../components/compenent-footer/Footer";
 
 export default function WelcomePage() {
   return (
@@ -11,6 +11,10 @@ export default function WelcomePage() {
       <Navbar />
       <TextHeader />
       <SearchCard />
+<<<<<<< HEAD
+=======
+      <Footer />
+>>>>>>> 757911a1927f3ab6d4be3aa28c76764e679447ec
     </div>
   );
 }

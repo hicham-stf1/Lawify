@@ -7,7 +7,6 @@ import Wrapper from "../assets/wrappers/LandingPage";
 import Wrapper1 from "../assets/wrappers/RegisterPage";
 import FormRowSelect from "../components/FormRowSelect";
 import { useAppContext } from "../context/appContext";
-import Profiles from "../pages/ProfilesForSearch/Profiles";
 
 const initialState = {
   speciality: "",
@@ -48,7 +47,7 @@ function SearchCard() {
                 <h3>Chercher un Avocat</h3>
 
                 {/* Spécialité field */}
-                <div className="form-row">
+                <div className="form-row" style={{ marginTop: "20px" }}>
                   {/* Spécialité */}
                   <FormRowSelect
                     labelText="Spécialité"
