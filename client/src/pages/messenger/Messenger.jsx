@@ -17,8 +17,7 @@ function Messenger() {
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const socket = useRef();
-  const { user } = useAppContext();
-  const [userr, setUserr] = useState(user);
+  const user = JSON.parse(localStorage.getItem("user"));
   const scrollRef = useRef();
   const currentUser = useParams().currentUser;
   const currentFriend = useParams().currentFriend;
@@ -62,22 +61,22 @@ function Messenger() {
   }, [arrivalMessage, currentChat]);
 
   useEffect(() => {
-    socket.current.emit("addUser", userr._id);
-  }, [userr]);
+    socket.current.emit("addUser", user._id);
+  }, [user]);
 
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const res = await axios.get("/api/v1/conversations/" + userr._id);
+        const res = await axios.get("/api/v1/conversations/" + user._id);
         setConversations(res.data);
         console.log(`user convos :${res.data}`);
-        console.log(userr.name);
+        console.log(user.name);
       } catch (err) {
         console.log(err);
       }
     };
     getConversations();
-  }, [userr]);
+  }, [user]);
 
   useEffect(() => {
     const getMessages = async () => {
@@ -95,17 +94,17 @@ function Messenger() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const message = {
-      sender: userr._id,
+      sender: user._id,
       text: newMessage,
       conversationId: currentChat._id,
     };
 
     const receiverId = currentChat.members.find(
-      (member) => member !== userr._id
+      (member) => member !== user._id
     );
 
     socket.current.emit("sendMessage", {
-      senderId: userr._id,
+      senderId: user._id,
       receiverId,
       text: newMessage,
     });
@@ -129,13 +128,12 @@ function Messenger() {
       <div className="messenger">
         <div className="chatMenu">
           <div className="chatMenuWrapper">
-            <input placeholder="Search for friends" className="chatMenuInput" />
             {conversations.map((c) => (
               <div onClick={() => setCurrentChat(c)}>
                 <Conversation
                   key={c._id}
                   conversation={c}
-                  currentUser={userr}
+                  currentUser={user}
                   currentChat={c._id === currentChat._id}
                 />
               </div>
@@ -157,7 +155,7 @@ function Messenger() {
                         <Message
                           key={m._id}
                           message={m}
-                          own={m.sender === userr._id}
+                          own={m.sender === user._id}
                         />
                       </div>
                     ))

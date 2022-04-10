@@ -90,7 +90,7 @@
 }
 .item-info header {
   display: flex;
-  margin-left: -14px;
+  margin-left: -60px;
   justify-content: space-between;
   border-bottom: 0.5px dotted var(--clr-grey-5);
 }

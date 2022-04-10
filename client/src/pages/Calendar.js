@@ -27,7 +27,6 @@ function Calendar() {
   const [selectedMonth, setSelectedMonth] = useState(0);
   const [modalState, setModalState] = useState(false);
   const [appointments, setAppointments] = useState([]);
-  const [userr, setUserr] = useState(user);
 
   const startOfDay = moment()
     .year(selectedYear)
@@ -66,7 +65,7 @@ function Calendar() {
   useEffect(() => {
     const getAppointments = async () => {
       try {
-        const res = await axios.get(`/api/v1/calender/${userr._id}`);
+        const res = await axios.get(`/api/v1/calender/${user._id}`);
         setAppointments(res.data);
         console.log(res);
       } catch (err) {
@@ -84,6 +83,7 @@ function Calendar() {
       endTime: data.endTime,
       date: date,
       createdBy: user._id,
+      avocatName: user.name
     };
     // N.B that (startTime > endTime)
     axios({

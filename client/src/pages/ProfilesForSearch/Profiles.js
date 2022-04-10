@@ -58,7 +58,7 @@ class Profiles extends React.Component {
   getBlogPost = () => {
     axios
       .get(
-        localStorage.getItem("city").trim().length === 0 ||
+        localStorage.getItem("city").trim().length === 0 &&
           localStorage.getItem("speciality").trim().length === 0
           ? `/api/avocats`
           : `/api/avocat?city=${localStorage
@@ -92,7 +92,7 @@ class Profiles extends React.Component {
         return (
           <div key={_id}>
             <article className="menu-item">
-              <Link to={link}>
+              <Link style={{width:"fit-content"}} to={link}>
                 <img
                   style={{
                     width: "130px",

@@ -1,16 +1,12 @@
 import express from "express";
 import bodyParser from "body-parser";
-// import cors from "cors";
-
-const app = express();
 import cors from "cors";
-
 import morgan from "morgan";
-
 import dotenv from "dotenv";
 dotenv.config();
 import "express-async-errors";
 
+const app = express();
 import CalenderController from "./controllers/CalenderController.js";
 app.use(cors());
 
@@ -22,8 +18,8 @@ import userRoutes from "./routes/userRoutes.js";
 import authRouter from "./routes/authRoutes.js";
 import conversationRouter from "./routes/conversations.js";
 import messageRouter from "./routes/messages.js";
-
 import calenderRouter from "./routes/CalenderRoutes.js";
+import CalenderRouter from "./controllers/CalenderController.js";
 import routes from "./routes/api.js";
 
 //middleware
@@ -47,18 +43,12 @@ app.get("/api/v1", (req, res) => {
 });
 
 app.use("/api/v1/calender", calenderRouter);
-
 app.use("/api/v1/auth", authRouter);
-// app.use("/api/v1/auth", authenticateUser, authRouter);
-
-// app.use("/api/v1/jobs", jobsRouter);
 app.use("/api/users", userRoutes);
 app.use("/api/v1/conversations", conversationRouter);
 app.use("/api/v1/messages", messageRouter);
-
-// app.use("/api/v1/jobs", jobsRouter);
-app.use("/api", CalenderController);
-
+app.use("/test", routes);
+app.use("/api", CalenderRouter);
 app.use(notFoundModule);
 app.use(errorHandlerMiddleware);
 

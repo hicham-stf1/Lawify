@@ -38,6 +38,9 @@ const RdvTimeSchema = mongoose.Schema({
     type: String,
     default: "",
   },
+  avocatName:{
+    type: String
+  }
 });
 
 const RDVTime = mongoose.model("RdvTime", RdvTimeSchema);

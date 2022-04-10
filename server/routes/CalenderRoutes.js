@@ -4,6 +4,7 @@ import RdvTime from "../model/RdvTime.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {
+  console.log("weeeeeeeeeeeeeeeeeeeeeeee3");
   RdvTime.find({})
     .then((data) => {
       console.log("Data: ", data);
@@ -43,6 +44,19 @@ router.get("/:createdBy", (req, res) => {
     })
     .catch((error) => {
       console.log(error.message);
+    });
+});
+
+router.get("/appointements/:userId", (req, res) => {
+  console.log("weeeeeeeeeeeeeeeeeeeeeeee3");
+  const userId = req.params.userId;
+  RdvTime.find({ bookedBy: userId })
+    .then((data) => {
+      console.log("Data: ", data);
+      res.json(data);
+    })
+    .catch((error) => {
+      console.log("error: ", error);
     });
 });
 

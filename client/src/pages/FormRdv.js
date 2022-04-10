@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import FormRow from "../components/FormRow";
 import Wrapper from "../assets/wrappers/RegisterPage";
-
 import { useAppContext } from "../context/appContext";
 import { useNavigate } from "react-router-dom";
-import UserNavbar from "../components/NavBar/UserNavBar";
+import UserNavbar from "../components/NavBar/Navbar";
 import Footer from "../components/compenent-footer/Footer";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -12,10 +11,10 @@ import axios from "axios";
 // global context and useNavigate later
 
 const initialState = {
-  nom: "",
-  prenom: "",
+  firstName: "",
+  lastName: "",
   email: "",
-  telephone: "",
+  tele: "",
   isMember: true,
 };
 // if possible prefer local state
@@ -24,26 +23,29 @@ const initialState = {
 function FormRdv() {
   const [values, setValues] = useState(initialState);
   const [userData, setUserData] = useState(null);
-  const selectedAvocat = useParams().selectedAvocat;
+  const [selectedAvocat, setSelectedAvocat] = useState(
+    useParams().selectedAvocat
+  );
   const date = useParams().date;
   const startTime = useParams().startTime;
   const endTime = useParams().endTime;
+  const appointmentId = useParams().appointmentId;
+  const user = JSON.parse(localStorage.getItem("user"));
 
   // global context and useNavigate later
-  const { isLoading, showAlert, displayAlert, loginUser, user } =
-    useAppContext();
+  const { isLoading, showAlert, displayAlert, loginUser } = useAppContext();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    const { nom, prenom, email, telephone } = values;
-    if (!email || !telephone || !nom || !prenom) {
-      displayAlert();
-      return;
-    }
+    await axios.patch(
+      "/api/calendar/" + appointmentId + "/" + user._id,
+      values
+    );
+    navigate("/");
   };
 
   useEffect(() => {
@@ -51,8 +53,6 @@ function FormRdv() {
       try {
         const res = await axios("/api/users?userId=" + selectedAvocat);
         setUserData(res.data);
-        console.log(res.data);
-        console.log(` user : ${userData}`);
       } catch (err) {
         console.log(err);
       }
@@ -68,10 +68,19 @@ function FormRdv() {
         <form className="form" onSubmit={onSubmit}>
           <h3>Prendre votre rendez-vous</h3>
           <div className="rdv-infos">
-            {/* <div>Avocat : {userData.name}</div> */}
-            <div>Date : {date}</div>
-            <div>De : {startTime}</div>
-            <div>À : {endTime}</div>
+            <div className="info">
+              <span style={{ fontWeight: "bold" }}>Avocat</span> :{" "}
+              {userData?.name}
+            </div>
+            <div className="info">
+              <span style={{ fontWeight: "bold" }}>Date</span> : {date}
+            </div>
+            <div className="info">
+              <span style={{ fontWeight: "bold" }}>De</span> : {startTime}
+            </div>
+            <div className="info">
+              <span style={{ fontWeight: "bold" }}>À</span> : {endTime}
+            </div>
           </div>
 
           {/* name field */}
@@ -79,16 +88,16 @@ function FormRdv() {
             {/* email input */}
             <FormRow
               type="text"
-              name="nom"
+              name="lastName"
               labelText="nom"
-              value={values.nom}
+              value={values.lastName}
               handleChange={handleChange}
             />
             <FormRow
               type="text"
-              name="prenom"
+              name="firstName"
               labelText="prenom"
-              value={values.prenom}
+              value={values.firstName}
               handleChange={handleChange}
             />
             <FormRow
@@ -100,9 +109,9 @@ function FormRdv() {
             />
             <FormRow
               type="text"
-              name="téléphone"
+              name="tele"
               labelText="téléphone"
-              value={values.telephone}
+              value={values.tele}
               handleChange={handleChange}
             />
           </div>

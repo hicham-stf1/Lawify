@@ -8,8 +8,7 @@ import { useAppContext } from "../../context/appContext";
 
 const Navbar = () => {
   const [showLinks, setShowLinks] = useState(false);
-  const { user } = useAppContext();
-  const [userr, setUserr] = useState(user);
+  const user = JSON.parse(localStorage.getItem("user"));
   const linksContainerRef = useRef(null);
   const linksRef = useRef(null);
   const toggleLinks = () => {
@@ -51,7 +50,7 @@ const Navbar = () => {
               </a>
             </li>
 
-            {userr && userr.role === "avocat" ? (
+            {user && user.role === "avocat" ? (
               <li>
                 <a style={{ width: "fit-content" }} href="/calender">
                   Mon Calendrier

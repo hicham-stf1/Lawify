@@ -30,8 +30,7 @@ function About(props) {
   const openInfosModal = () => {
     setInfosModalState(!infosModalState);
   };
-  const { user } = useAppContext();
-  const [userr, setUserr] = useState(user);
+  const user = JSON.parse(localStorage.getItem("user"));
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
@@ -68,7 +67,7 @@ function About(props) {
             <p class="desc">{userData?.presentation}</p>
             <br />
           </div>
-        ) : props.user === userr._id ? (
+        ) : props.user === user._id ? (
           <div id="presentation">
             <div style={{ height: "100px" }} class="container1 section-header">
               <button
@@ -112,7 +111,7 @@ function About(props) {
               ))}
             </div>
           </div>
-        ) : props.user === userr._id ? (
+        ) : props.user === user._id ? (
           <div id="competences">
             <div style={{ height: "100px" }} class="container1 section-header">
               <button
@@ -137,7 +136,7 @@ function About(props) {
         {userData?.adresse == null &&
         userData?.tele == null &&
         userData?.website == null ? (
-          props.user === userr._id ? (
+          props.user === user._id ? (
             <div id="coordonnees" class="container1">
               <div style={{ height: "100px" }} class="section-header">
                 <button
@@ -201,7 +200,7 @@ function About(props) {
         {userData?.langues.length === 0 &&
         userData?.formations.length == 0 &&
         userData?.tarifs == null ? (
-          props.user === userr._id ? (
+          props.user === user._id ? (
             <div id="infos">
               <div
                 style={{ height: "100px" }}

@@ -18,31 +18,8 @@ function SearchCard() {
   const [specialities, setSpecialities] = useState();
   const [values, setValues] = useState(initialState);
 
-  useEffect(() => {
-    const getCities = async () => {
-      try {
-        const res = await axios.get("/api/v1/cities");
-        setCities(res.data);
-        console.log(res);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getCities();
-  }, []);
 
-  useEffect(() => {
-    const getSpecialities = async () => {
-      try {
-        const res = await axios.get("/api/v1/specialities");
-        setSpecialities(res.data);
-        console.log(res);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getSpecialities();
-  }, []);
+
 
   // global context and useNavigate later
   const { specialityOptions, villeOptions, city, speciality } = useAppContext();
