@@ -113,14 +113,21 @@ const AvocatShema = new mongoose.Schema({
     type: Array,
     default: [],
   },
+  domaines: {
+    type: Array,
+    default: [],
+  },
   adresse: {
     type: String,
+    default:""
   },
   website: {
     type: String,
+    default:""
   },
   tele: {
     type: String,
+    default:""
   },
 
   langues: {

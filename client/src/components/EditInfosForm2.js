@@ -1,7 +1,7 @@
 import Modal from "react-modal";
-import { useForm } from "react-hook-form";
 import { useState } from "react";
 import axios from "axios";
+import {useNavigate} from 'react-router-dom'
 import {
   ModalCancel,
   ModalSubmit,
@@ -16,55 +16,38 @@ import {
 } from "../assets/styledComponent/index";
 
 function EditInfosForm2(props) {
-  const { register, handleSubmit } = useForm();
-  const [langues, setLangues] = useState([]);
-  const [formations, setFormations] = useState([]);
+  const [domaines, setDomaines] = useState(props.userData?.domaines);
+  const [adresse, setAdresse] = useState(props.userData?.adresse);
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log(`userData props ${props.userData}`)
 
-  const handleOnChangeEnligne = () => {
-    console.log("test");
-    document.getElementById("enligneprice").disabled =
-      !document.getElementById("enligneprice").disabled;
-  };
-  const handleOnChangeCabinet = () => {
-    console.log("test");
-    document.getElementById("cabinetprice").disabled =
-      !document.getElementById("cabinetprice").disabled;
-  };
 
-  const onSubmit = (data) => {
-    console.log(langues);
-    console.log(formations);
-    props.onModalSubmit(data);
-    props.openModal();
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    await axios.patch(
+      "/api/user/"+ user._id,
+      {domaines, adresse}
+    ).then(window.location.reload(false))
   };
 
-  const addLangue = (e) => {
+  const handleAdresse = (e)=>{
+    setAdresse(e.target.value)
+    console.log(adresse)
+  }
+
+  const addDomaine = (e) => {
     if (e.key === "Shift") {
       if (e.target.value.length > 0) {
-        setLangues([...langues, e.target.value]);
+        setDomaines([...domaines, e.target.value]);
         e.target.value = "";
       }
     }
   };
-  const removeLangue = (removedLangue) => {
-    const newLangues = langues.filter((langue) => langue !== removedLangue);
-    setLangues(newLangues);
+  const removeDomaine = (removedDomaine) => {
+    const newDomaine = domaines.filter((domaine) => domaine !== removedDomaine);
+    setDomaines(newDomaine);
   };
 
-  const addFormation = (e) => {
-    if (e.key === "Shift") {
-      if (e.target.value.length > 0) {
-        setFormations([...formations, e.target.value]);
-        e.target.value = "";
-      }
-    }
-  };
-  const removeFormation = (removedFormation) => {
-    const newFormations = formations.filter(
-      (formation) => formation !== removedFormation
-    );
-    setFormations(newFormations);
-  };
 
   return (
     <Modal
@@ -75,7 +58,7 @@ function EditInfosForm2(props) {
       contentLabel="Example Modal"
     >
       <ModalHeader>Modifier vos informations</ModalHeader>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={onSubmit}>
         <ModalBody>
           <label
             style={{ whiteSpace: "nowrap", float: "left", marginLeft: "-1px" }}
@@ -86,19 +69,20 @@ function EditInfosForm2(props) {
           </label>
           <div className="form-row">
             <input
+            value={adresse}
               name="adresse"
-              {...register("adresse")}
+              onChange={handleAdresse}
               className="form-input"
             />
           </div>
           Domaines
           <TagInput className="App">
             <div className="tag-container">
-              {langues.map((langue, index) => {
+              {domaines?.map((domaine, index) => {
                 return (
                   <div key={index} className="tag">
-                    {langue}{" "}
-                    <span onClick={() => removeLangue(langue)}>
+                    {domaine}{" "}
+                    <span onClick={() => removeDomaine(domaine)}>
                       <i className="fas fa-times-circle"></i>
                     </span>
                   </div>
@@ -107,32 +91,11 @@ function EditInfosForm2(props) {
 
               <input
                 placeholder="Enter text and click shift to add"
-                onKeyDown={addLangue}
+                onKeyDown={addDomaine}
               />
             </div>
           </TagInput>
-          Types de rendez-vous
-          <div className="form-row">
-            <input
-              id="enligne"
-              value="enligne"
-              type="checkbox"
-              onClick={handleOnChangeEnligne}
-              name="enligne"
-              {...register("enligne")}
-            />
-            <label for="enligne"> Rendez-vous en ligne</label>
-            <br />
-            <input
-              id="cabinet"
-              value="cabinet"
-              type="checkbox"
-              onClick={handleOnChangeCabinet}
-              name="cabinet"
-              {...register("cabinetprice")}
-            />
-            <label for="cabinet"> Rendez-vous au cabinet</label>
-          </div>
+          
         </ModalBody>
         <ModalFooter>
           <ModalSubmit>Submit</ModalSubmit>

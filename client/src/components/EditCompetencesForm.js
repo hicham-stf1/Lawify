@@ -20,7 +20,8 @@ const theData = localStorage.getItem("appointMentData");
 
 function EditCompetencesForm(props) {
   const { register, handleSubmit } = useForm();
-  const [competences, setCompetences] = useState([]);
+  const [competences, setCompetences] = useState(props.user?.competences);
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const addCompetence = (e) => {
     if (e.key === "Shift") {
@@ -37,11 +38,12 @@ function EditCompetencesForm(props) {
     setCompetences(newCompetences);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(competences);
-    props.onModalSubmit(competences);
-    props.openModal();
+    await axios.patch(
+      "/api/user/"+ user._id,
+      {competences}
+    ).then(window.location.reload(false))
   };
 
   return (
@@ -57,7 +59,7 @@ function EditCompetencesForm(props) {
         <ModalBody>
           <TagInput className="App">
             <div className="tag-container">
-              {competences.map((competence, index) => {
+              {competences?.map((competence, index) => {
                 return (
                   <div key={index} className="tag">
                     {competence}{" "}

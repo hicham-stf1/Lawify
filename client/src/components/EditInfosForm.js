@@ -16,9 +16,11 @@ import {
 } from "../assets/styledComponent/index";
 
 function EditInfosForm(props) {
-  const { register, handleSubmit } = useForm();
-  const [langues, setLangues] = useState([]);
-  const [formations, setFormations] = useState([]);
+  const [langues, setLangues] = useState(props.user?.langues);
+  const [formations, setFormations] = useState(props.user?.formations);
+  const [price, setPrice] = useState(props.user?.price);
+  const user = JSON.parse(localStorage.getItem("user"));
+
 
   const handleOnChangeEnligne = () => {
     console.log("test");
@@ -31,11 +33,12 @@ function EditInfosForm(props) {
       !document.getElementById("cabinetprice").disabled;
   };
 
-  const onSubmit = (data) => {
-    console.log(langues);
-    console.log(formations);
-    props.onModalSubmit(data);
-    props.openModal();
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    await axios.patch(
+      "/api/user/"+ user._id,
+      {langues, formations, price}
+    ).then(window.location.reload(false))
   };
 
   const addLangue = (e) => {
@@ -75,12 +78,12 @@ function EditInfosForm(props) {
       contentLabel="Example Modal"
     >
       <ModalHeader>Modifier vos informations</ModalHeader>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={onSubmit}>
         <ModalBody>
           Langues
           <TagInput className="App">
             <div className="tag-container">
-              {langues.map((langue, index) => {
+              {langues?.map((langue, index) => {
                 return (
                   <div key={index} className="tag">
                     {langue}{" "}
@@ -100,7 +103,7 @@ function EditInfosForm(props) {
           Diplomes et formations
           <TagInput className="App">
             <div className="tag-container">
-              {formations.map((formation, index) => {
+              {formations?.map((formation, index) => {
                 return (
                   <div key={index} className="tag">
                     {formation}{" "}
@@ -120,35 +123,10 @@ function EditInfosForm(props) {
           Tarifs
           <div className="form-row">
             <input
-              id="enligne"
-              value="enligne"
-              type="checkbox"
-              onClick={handleOnChangeEnligne}
-              name="enligne"
-              {...register("enligne")}
-            />
-            <label for="enligneprice"> Rendez-vous en ligne</label>
-            <input
-              disabled
-              id="enligneprice"
-              name="enligneprice"
-              {...register("enligneprice")}
-              className="form-input"
-            />
-            <input
-              id="cabinet"
-              value="cabinet"
-              type="checkbox"
-              onClick={handleOnChangeCabinet}
-              name="cabinet"
-              {...register("cabinetprice")}
-            />
-            <label for="cabinetprice"> Rendez-vous au cabinet</label>
-            <input
-              disabled
-              name="cabinetprice"
-              id="cabinetprice"
-              {...register("cabinetprice")}
+              id="price"
+              name="price"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
               className="form-input"
             />
           </div>
