@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useFetch } from "./useFetch";
 import Request from "./Request";
-// import "./requests.css";
 import RequestWrapper from "../../assets/wrappers/Requestes.js";
 
 function Requests() {

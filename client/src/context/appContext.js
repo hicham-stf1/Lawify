@@ -286,6 +286,26 @@ const AppProvider = ({ children }) => {
     }
     clearAlert();
   };
+  const updateAvocat = async (currentUser) => {
+    dispatch({ type: UPDATE_USER_BEGIN });
+    try {
+      const { data } = await authFetch.patch("/auth/updateAvocat", currentUser);
+      const { user, token } = data;
+      dispatch({
+        type: UPDATE_USER_SUCCESS,
+        payload: { user, token },
+      });
+      addUserToLocalStorage({ user, token });
+    } catch (error) {
+      if (error.response.status !== 401) {
+        dispatch({
+          type: UPDATE_USER_ERROR,
+          payload: { msg: error.response.data.msg },
+        });
+      }
+    }
+    clearAlert();
+  };
 
   // create job
   const createJob = async () => {
@@ -330,6 +350,7 @@ const AppProvider = ({ children }) => {
         updateUser,
         createJob,
         handleChange,
+        updateAvocat,
       }}
     >
       {children}

@@ -115,4 +115,23 @@ const updateUser = async (req, res) => {
   res.status(StatusCodes.OK).json({ user, token, location: user.location });
 };
 
-export { register, login, updateUser, registerLawyer };
+const updateAvocat = async (req, res) => {
+  const { email, name, phoneNumber, city, price } = req.body;
+  if (!email || !name) {
+    throw new badRequestError("Please provide all values");
+  }
+  const avocat = await Avocat.findOne({ _id: req.avocat.userId });
+  avocat.phoneNumber = phoneNumber;
+  avocat.email = email;
+  avocat.name = name;
+  // user.lastName = lastName;
+  // user.location = location;
+
+  await avocat.save();
+
+  const token = avocat.createJWT();
+
+  res.status(StatusCodes.OK).json({ avocat, token });
+};
+
+export { register, login, updateUser, registerLawyer, updateAvocat };

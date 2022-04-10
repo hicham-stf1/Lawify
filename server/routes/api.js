@@ -5,6 +5,7 @@ import TheTime from "../model/Time.js";
 import City from "../model/City.js";
 import Speciality from "../model/Speciality.js";
 import Avocat from "../model/Avocat.js";
+import authenticateUser from "../middleware/auth.js";
 
 // Routes
 router.get("/", (req, res) => {
@@ -52,5 +53,7 @@ router.post("/save", (req, res) => {
 router.delete("/:id", async (req, res) => {
   await TheTime.findByIdAndDelete(req.params.id);
 });
+
+
 
 export default router;
