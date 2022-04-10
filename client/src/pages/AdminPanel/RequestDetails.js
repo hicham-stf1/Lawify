@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./RequestDetails.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import emailjs from "emailjs-com";
 
 export default function RequestDetails() {
   const initailState = {
@@ -33,10 +34,30 @@ export default function RequestDetails() {
     }
   };
 
+  // const sendConfirmationMessage = () => {
+  var templateParams = {
+    email: values.email,
+    from_name: "Lawify Team",
+    message:
+      "You account has been confirmed, you a are welcome to Lawify as a lawyer. We rely on you to provide a good service for our clients, and we wish you a good journey and good luck for the next .",
+    to_name: values.name,
+  };
+
+  //   emailjs.send("service_hexbv63", "template_gbyolgo", templateParams).then(
+  //     function (response) {
+  //       console.log("SUCCESS!", response.status, response.text);
+  //     },
+  //     function (error) {
+  //       console.log("FAILED...", error);
+  //     }
+  //   );
+  // };
+
   const ConfirmAvocatAccount = () => {
     axios.patch("/api/avoca/" + requestId);
     // window.location.reload();
     window.location.href = "/requests";
+    emailjs.send("service_hexbv63", "template_gbyolgo", templateParams);
     //Send a email of Notification to the Lawyer
   };
 

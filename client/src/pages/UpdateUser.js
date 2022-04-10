@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
 import FormRow from "../components/FormRow";
 import Alert from "../components/Alert";
-import { Route } from "react-router-dom";
 import Wrapper from "../assets/wrappers/DashboardFormPage";
 import { useAppContext } from "../context/appContext";
-import Navbar from "../components/NavBar/Navbar";
 import UserNavbar from "../components/NavBar/UserNavBar";
 import { useNavigate } from "react-router-dom";
-import MonCompte from "./MonCompte";
 const Profile = () => {
   const { user, showAlert, displayAlert, updateUser, isLoading } =
     useAppContext();
@@ -62,12 +59,6 @@ const Profile = () => {
               value={email}
               handleChange={(e) => setEmail(e.target.value)}
             />
-            {/* <FormRow
-          type="text"
-          name="location"
-          value={location}
-          handleChange={(e) => setLocation(e.target.value)}
-        /> */}
             <button
               className="btn btn-block"
               type="submit"

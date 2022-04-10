@@ -68,7 +68,7 @@ function FormRdv() {
         <form className="form" onSubmit={onSubmit}>
           <h3>Prendre votre rendez-vous</h3>
           <div className="rdv-infos">
-            <div>Avocat : {userData.name}</div>
+            {/* <div>Avocat : {userData.name}</div> */}
             <div>Date : {date}</div>
             <div>De : {startTime}</div>
             <div>À : {endTime}</div>

@@ -5,6 +5,7 @@ import TheTime from "../model/Time.js";
 import City from "../model/City.js";
 import Speciality from "../model/Speciality.js";
 import Avocat from "../model/Avocat.js";
+import authenticateUser from "../middleware/auth.js";
 
 // Routes
 router.get("/", (req, res) => {
@@ -53,14 +54,18 @@ router.delete("/:id", async (req, res) => {
   await TheTime.findByIdAndDelete(req.params.id);
 });
 
-router.get("/v1/cities", async (req, res) => {
-  try {
-    const cities = await City.find({});
-    res.status(200).json(cities);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+router.get(
+  authenticateUser,
+  ("/v1/cities",
+  async (req, res) => {
+    try {
+      const cities = await City.find({});
+      res.status(200).json(cities);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  })
+);
 
 router.post("/v1/cities", async (req, res) => {
   const newCity = new City(req.body);
