@@ -163,7 +163,7 @@ const AppProvider = ({ children }) => {
         "/api/v1/auth/registerAvocat",
         currentUser
       );
-      window.location.href = "/avocathome";
+      window.location.href = "/";
       // console.log(response);
       const { user, token } = response.data;
       dispatch({

@@ -11,8 +11,6 @@ export default function WelcomePage() {
       <Navbar />
       <TextHeader />
       <SearchCard />
-      <Appel />
-      {/* <Requests /> */}
     </div>
   );
 }

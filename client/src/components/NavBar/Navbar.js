@@ -14,6 +14,9 @@ const Navbar = () => {
   const toggleLinks = () => {
     setShowLinks(!showLinks);
   };
+
+  const nouserStyle = {width: "fit-content", marginLeft:"800px"};
+
   useEffect(() => {
     const linksHeight = linksRef.current.getBoundingClientRect().height;
     if (showLinks) {
@@ -44,12 +47,15 @@ const Navbar = () => {
           ref={linksContainerRef}
         >
           <ul className="links" ref={linksRef}>
-            <li>
-              <a style={{ width: "fit-content" }} href="/messenger">
-                Messenger
-              </a>
-            </li>
-
+            {user? (
+              <li>
+                <a style={{ width: "fit-content"}} href="/messenger">
+                  Messenger
+                </a>
+              </li>
+            ) : (
+              <></>
+            )}
             {user && user.role === "avocat" ? (
               <li>
                 <a style={{ width: "fit-content" }} href="/calender">
@@ -60,18 +66,32 @@ const Navbar = () => {
               <></>
             )}
 
+            {user? (
+              <li>
+                <a style={{ width: "fit-content" }} href="/appointements">
+                  Mes Rendez-vous
+                </a>
+              </li>
+            ) : (
+              <></>
+            )}
+
             <li>
-              <a style={{ width: "fit-content" }} href="/projects">
-                Mes Rendez-vous
-              </a>
-            </li>
-            <li>
-              <a
-                style={{ width: "fit-content" }}
+              { !user?
+                (<a
+                style={{ width: "fit-content", marginLeft:"800px" }}
                 href={user ? `/profile` : `/moncompte`}
               >
                 {user ? `Mon Profil` : `Se Connecter`}
-              </a>
+              </a>):(<a
+                style={{ width: "fit-content"}}
+                href={user ? `/profile` : `/moncompte`}
+              >
+                {user ? `Mon Profil` : `Se Connecter`}
+              </a>)
+              }
+  
+              
             </li>
             {user ? (
               <li>
@@ -84,16 +104,6 @@ const Navbar = () => {
             )}
           </ul>
         </div>
-        {/* <ul className="social-icons">
-          {social.map((socialIcon) => {
-            const { id, url, icon } = socialIcon;
-            return (
-              <li key={id}>
-                <a href={url}>{icon}</a>
-              </li>
-            );
-          })}
-        </ul> */}
       </div>
     </nav>
   );

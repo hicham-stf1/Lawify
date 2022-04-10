@@ -1,7 +1,7 @@
 import "./App.css";
 import { WelcomePage, MonCompte, AreYouALawyer, Error } from "./pages";
 import Messenger from "./pages/messenger/Messenger.jsx";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Navigate, BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 //This need a refactor later
 import Register from "./pages/UserRegister";
@@ -30,40 +30,33 @@ import Requests from "./pages/AdminPanel/Requests";
 import RequestDetails from "./pages/AdminPanel/RequestDetails";
 
 function App() {
+  const user = JSON.parse(localStorage.getItem("user"));
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<WelcomePage />} />
-        <Route path="/profile/:visitedUser" element={<Profil />} />
-        <Route path="/profile" element={<MyProfile />} />
+        <Route path="/profile/:visitedUser" element={user?<Profil/>:<Navigate replace to ="/moncompte"/>} />
+        <Route path="/profile" element={user?<MyProfile/>:<Navigate replace to ="/moncompte"/>} />
         <Route path="/requests" element={<Requests />} />
         <Route path="/requestDetails/:requestId" element={<RequestDetails />} />
-        <Route path="/update-profile" element={<UserProfile />} />
-        <Route path="/appointements" element={<MesRdv />} />
+        <Route path="/appointements" element={user?<MesRdv/>:<Navigate replace to ="/moncompte"/>} />
         <Route
           path="/book-appointment/:selectedAvocat/:appointmentId/:date/:startTime/:endTime"
           element={<FormRdv />}
         />
-        <Route path="/passed-appointements" element={<MesRdvPass />} />
-        <Route path="/appointment-confirmation" element={<ConfirmerRdv />} />
-        <Route path="/update-avocat" element={<UpdateAvocat />} />
-        <Route path="/message" element={<Chat />} />
-        <Route path="/moncompte" element={<MonCompte />} />
-        <Route path="/userhome" element={<UserHome />} />
-        <Route path="/avocathome" element={<AvocatHome />} />
-        <Route path="/areyoualawyer" element={<AreYouALawyer />} />
-        <Route path="/registeruser" element={<UserRegister />} />
-        <Route path="/registeravocat" element={<LawyerRegister />} />
+        <Route path="/passed-appointements" element={user?<MesRdvPass/>:<Navigate replace to ="/moncompte"/>} />
+        <Route path="/appointment-confirmation" element={user?<ConfirmerRdv/>:<Navigate replace to ="/moncompte"/>} />
+        <Route path="/moncompte" element={!user?<MonCompte/>:<Navigate replace to ="/"/>} />
+        <Route path="/registeruser" element={!user?<UserRegister/>:<Navigate replace to ="/moncompte"/>} />
+        <Route path="/registeravocat" element={!user?<LawyerRegister/>:<Navigate replace to ="/moncompte"/>} />
         <Route path="/searchresult" element={<SearchResult />} />
         <Route
           path="/messenger/:currentUser/:currentFriend"
-          element={<Messenger />}
+          element={user?<Messenger/>:<Navigate replace to ="/moncompte"/>}
         />
-        <Route path="/messenger" element={<Messenger />} />
-        <Route path="/fetchtime" element={<FetchTime />} />
+        <Route path="/messenger" element={user?<Messenger/>:<Navigate replace to ="/moncompte"/>} />
         <Route path="/year/:year/month/:month" element={<Calendar />} />
-        <Route path="/calender" element={<Calendar />} />
-        <Route path="/availibilityslots" element={<AvailabilitySlots />} />
+        <Route path="/calender" element={(user && user?.role=="avocat") ?<Calendar/>:<Navigate replace to ="/"/>} />
         <Route path="*" element={<Error />} />
       </Routes>{" "}
       {/* <Footer /> */}

@@ -10,11 +10,16 @@ import avocatDefaultImg from "../assets/images/avocat-default-img.png";
 import userDefaultImg from "../assets/images/user-default-img.png";
 import { useAppContext } from "../context/appContext";
 import EditInfosForm from "../components/EditInfosForm2";
+import Calendar from "./Calendar"
 
 function Banner(props) {
   const [infosModalState, setInfosModalState] = useState(false);
+  const [calendarState, setCalendarState] = useState(false);
   const openInfosModal = () => {
     setInfosModalState(!infosModalState);
+  };
+  const openCalendar = () => {
+    setCalendarState(!calendarState);
   };
   const user = JSON.parse(localStorage.getItem("user"));
   const [userData, setUserData] = useState(null);
@@ -96,20 +101,27 @@ function Banner(props) {
         </div>
         <div class="actions">
           {user._id === props.user ? (
+            <>
+            
             <button onClick={openInfosModal} className="btn btn-block button">
               Modifier Mes Informations
             </button>
+            <Link to="/calender">
+            <button type="submit" className="btn btn-block button">
+              Mon Calendrier
+            </button>
+          </Link>
+            </>
           ) : null}
 
-          {userData?.role === "avocat" && props.user !== user._id ? (
+          {props.user !== user._id ? (
             <>
-              <Link to="/fetchtime">
-                <button type="submit" className="btn btn-block button">
-                  {user._id === props.user
-                    ? "Mon Calendrier"
-                    : "Voir Calendrier"}
+
+              <a >
+                <button onClick={openCalendar} className="btn btn-block button">
+                  Voir calendier
                 </button>
-              </Link>
+              </a>
               <a href={link}>
                 <button type="submit" className="btn btn-block button">
                   Envoyer un message
@@ -127,6 +139,13 @@ function Banner(props) {
         userData={userData}
         // onModalSubmit={onModalSubmit}
       />
+      <Calendar
+            id="calendar"
+            selectedAvocat={props.user}
+            calendarState={calendarState}
+            openCalendar={openCalendar}
+            // onModalSubmit={onInfosModalSubmit}
+          />
     </div>
   );
 }
