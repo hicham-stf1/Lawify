@@ -11,10 +11,7 @@ export default function WelcomePage() {
       <Navbar />
       <TextHeader />
       <SearchCard />
-<<<<<<< HEAD
-=======
       <Footer />
->>>>>>> 757911a1927f3ab6d4be3aa28c76764e679447ec
     </div>
   );
 }
