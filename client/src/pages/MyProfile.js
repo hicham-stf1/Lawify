@@ -8,16 +8,15 @@ import "../css/Main.css";
 import { useAppContext } from "../context/appContext";
 
 function MyProfile() {
-  const { user } = useAppContext();
-  const [userr, setUserr] = useState(user);
+  const user = JSON.parse(localStorage.getItem("user"));
 
   return (
     <div>
       <Navbar />
       <br />
-      <Banner user={userr._id} />
+      <Banner user={user._id} />
       <br />
-      {userr.role === "user" ? null : <About user={userr._id} />}
+      {user.role === "user" ? null : <About user={user._id} />}
 
       <br />
     </div>

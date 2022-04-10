@@ -41,7 +41,7 @@ function App() {
         <Route path="/update-profile" element={<UserProfile />} />
         <Route path="/appointements" element={<MesRdv />} />
         <Route
-          path="/book-appointment/:selectedAvocat/:date/:startTime/:endTime"
+          path="/book-appointment/:selectedAvocat/:appointmentId/:date/:startTime/:endTime"
           element={<FormRdv />}
         />
         <Route path="/passed-appointements" element={<MesRdvPass />} />

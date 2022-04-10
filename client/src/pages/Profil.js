@@ -8,8 +8,7 @@ import "../css/Main.css";
 import { useAppContext } from "../context/appContext";
 
 function Profil() {
-  const { user } = useAppContext();
-  const [userr, setUserr] = useState(user);
+  const user = JSON.parse(localStorage.getItem("user"));
   const visitedUser = useParams().visitedUser;
 
   return (

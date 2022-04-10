@@ -30,7 +30,6 @@ function Calendar(props) {
   const [selectedMonth, setSelectedMonth] = useState(0);
   const [modalState, setModalState] = useState(false);
   const [appointments, setAppointments] = useState([]);
-  const [userr, setUserr] = useState(user);
 
   const startOfDay = moment()
     .year(selectedYear)

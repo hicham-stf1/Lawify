@@ -16,9 +16,9 @@ function Banner(props) {
   const openInfosModal = () => {
     setInfosModalState(!infosModalState);
   };
-  const { user } = useAppContext();
-  const [userr, setUserr] = useState(user);
+  const user = JSON.parse(localStorage.getItem("user"));
   const [userData, setUserData] = useState(null);
+
   useEffect(() => {
     const getUserData = async () => {
       try {
@@ -33,7 +33,7 @@ function Banner(props) {
     };
     getUserData();
   }, [props.user]);
-  const link = `/messenger/${userr._id}/${props.user}`;
+  const link = `/messenger/${user._id}/${props.user}`;
   return (
     <div class="container1">
       <div class="cover-photo">
@@ -94,17 +94,17 @@ function Banner(props) {
           ) : null}
         </div>
         <div class="actions">
-          {userr._id === props.user ? (
+          {user._id === props.user ? (
             <button onClick={openInfosModal} className="btn btn-block button">
               Modifier Mes Informations
             </button>
           ) : null}
 
-          {userData?.role === "avocat" && props.user !== userr._id ? (
+          {userData?.role === "avocat" && props.user !== user._id ? (
             <>
               <Link to="/fetchtime">
                 <button type="submit" className="btn btn-block button">
-                  {userr._id === props.user
+                  {user._id === props.user
                     ? "Mon Calendrier"
                     : "Voir Calendrier"}
                 </button>

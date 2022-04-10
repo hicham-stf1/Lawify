@@ -25,6 +25,7 @@ function DateComponent(props) {
                   endTime={appointment.endTime}
                   selectedAvocat={props.selectedAvocat}
                   date={appointment.date}
+                  appointmentId={appointment._id}
                 ></Appointment>
               </button>
             ) : null

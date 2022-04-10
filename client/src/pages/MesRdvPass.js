@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import FormRow from "../components/FormRow";
 import Wrapper from "../assets/wrappers/RegisterPage";
 import { useAppContext } from "../context/appContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import UserNavbar from "../components/NavBar/UserNavBar";
 import Footer from "../components/compenent-footer/Footer";
 import "../css/RDV.scss";
@@ -13,8 +13,10 @@ function MesRdvPass() {
       <UserNavbar />
       <Wrapper className="full-page">
         <nav className="RdvNav">
-          <a href="/appointements">Rendez-vous à venir</a>
-          <a href="/passed-appointements">Rendez-vous passés </a>
+          <Link to="/appointements">Rendez-vous à venir</Link>
+          <Link className="link" to="/passed-appointements">
+            Rendez-vous passés{" "}
+          </Link>
 
           <div class="animation start-home"></div>
         </nav>
